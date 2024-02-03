@@ -1,0 +1,277 @@
+﻿@model PartnerViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Partner";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName; ;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "partner";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/partner" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/partner" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/partner" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/partner" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/partner" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/partner" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/partner" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/partner" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="row main-color partner-text">
+                @{
+                    if (lang == "az")
+                    {
+                        var content_1 = Model.PartnerComponent?.SplitedContent_AZ.FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_1
+                        </div>
+
+                        var content_2 = Model.PartnerComponent?.SplitedContent_AZ.Skip(1).FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_2
+                        </div>
+                    }
+                    else if (lang == "ru")
+                    {
+                        var content_1 = Model.PartnerComponent?.SplitedContent_RU.FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_1
+                        </div>
+
+                        var content_2 = Model.PartnerComponent?.SplitedContent_RU.Skip(1).FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_2
+                        </div>
+                    }
+                    else if (lang == "en")
+                    {
+                        var content_1 = Model.PartnerComponent?.SplitedContent_EN.FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_1
+                        </div>
+
+                        var content_2 = Model.PartnerComponent?.SplitedContent_EN.Skip(1).FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_2
+                        </div>
+                    }
+                    else if (lang == "tr")
+                    {
+                        var content_1 = Model.PartnerComponent?.SplitedContent_TR.FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_1
+                        </div>
+
+                        var content_2 = Model.PartnerComponent?.SplitedContent_TR.Skip(1).FirstOrDefault();
+
+                        <div class="col-12 col-md-6">
+                            @content_2
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        @{
+            var photoPath = "/uploads/" + Model.PartnerComponent?.PhotoName;
+        }
+        <div class="partner-image" style="background-image: url('@photoPath');"></div>
+        <div class="container">
+            <div class="row main-color partner-text">
+                @{
+                    if (lang == "az")
+                    {
+                        var content_3 = Model.PartnerComponent?.SplitedContent_AZ.Skip(2).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_3
+                        </div>
+
+                        var content_4 = Model.PartnerComponent?.SplitedContent_AZ.Skip(3).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_4
+                        </div>
+
+                        var content_5 = Model.PartnerComponent?.SplitedContent_AZ.Skip(4).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_5
+                        </div>
+                    }
+                    else if (lang == "ru")
+                    {
+                        var content_3 = Model.PartnerComponent?.SplitedContent_RU.Skip(2).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_3
+                        </div>
+
+                        var content_4 = Model.PartnerComponent?.SplitedContent_RU.Skip(3).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_4
+                        </div>
+
+                        var content_5 = Model.PartnerComponent?.SplitedContent_RU.Skip(4).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_5
+                        </div>
+                    }
+                    else if (lang == "en")
+                    {
+                        var content_3 = Model.PartnerComponent?.SplitedContent_EN.Skip(2).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_3
+                        </div>
+
+                        var content_4 = Model.PartnerComponent?.SplitedContent_EN.Skip(3).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_4
+                        </div>
+
+                        var content_5 = Model.PartnerComponent?.SplitedContent_EN.Skip(4).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_5
+                        </div>
+                    }
+                    else if (lang == "tr")
+                    {
+                        var content_3 = Model.PartnerComponent?.SplitedContent_TR.Skip(2).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_3
+                        </div>
+
+                        var content_4 = Model.PartnerComponent?.SplitedContent_TR.Skip(3).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_4
+                        </div>
+
+                        var content_5 = Model.PartnerComponent?.SplitedContent_TR.Skip(4).FirstOrDefault();
+
+                        <div class="col-12 col-md-4">
+                            @content_5
+                        </div>
+                    }
+                }
+            </div>
+            <div class="row partner-components">
+                @foreach (var partner in Model.Partners)
+                {
+                    var logoPath = "/uploads/" + partner.LogoName;
+
+                    <div class="col-12 col-sm-6 my-4 col-lg-4 col-xl-3 d-flex align-items-center justify-content-center">
+                        <img class="partner-component" src="@logoPath">
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)

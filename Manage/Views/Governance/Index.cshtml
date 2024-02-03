@@ -1,0 +1,365 @@
+﻿@model GovernanceViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Governance";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName; ;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "governance";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/governance" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/governance" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/governance" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/governance" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/governance" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/governance" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/governance" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/governance" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            @{
+                var order = 1;
+
+                foreach (var governanceComponent in Model.GovernanceComponents)
+                {
+                    if (order % 2 == 1)
+                    {
+                        <div class="governance-component row mt-5">
+                            <div class="col-12 col-md-5 mt-3 mt-md-0 d-flex align-items-center order-12 order-md-1">
+                                <div>
+                                    <h1 class="governance-content-title">
+                                        @if (lang == "az")
+                                        {
+                                            @governanceComponent.Title_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @governanceComponent.Title_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @governanceComponent.Title_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @governanceComponent.Title_TR
+                                        }
+                                    </h1>
+                                    <div class="governance-component-text black-color">
+                                        @if (lang == "az")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_AZ)
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_RU)
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_EN)
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_TR)
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-7 d-flex align-items-center order-1 order-md-12">
+                                @{
+                                    var photoPath = "/uploads/" + governanceComponent.PhotoName;
+                                }
+                                <img class="w-100 governance-component-img" src="@photoPath" alt="">
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="governance-component row mt-5">
+                            <div class="col-12 col-md-7 d-flex align-items-center">
+                                @{
+                                    var photoPath = "/uploads/" + governanceComponent.PhotoName;
+                                }
+                                <img class="w-100 governance-component-img" src="@photoPath" alt="">
+                            </div>
+                            <div class="col-12 col-md-5 mt-3 mt-md-0 d-flex align-items-center">
+                                <div>
+                                    <h1 class="governance-content-title">
+                                        @if (lang == "az")
+                                        {
+                                            @governanceComponent.Title_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @governanceComponent.Title_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @governanceComponent.Title_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @governanceComponent.Title_TR
+                                        }
+                                    </h1>
+                                    <div class="governance-component-text black-color">
+                                        @if (lang == "az")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_AZ)
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_RU)
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_EN)
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Html.Raw(governanceComponent.Content_TR)
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    order++;
+                }
+            }
+        </div>
+    </section>
+    <h1 class="section-title main-color text-center">
+        @if (lang == "az")
+        {
+            @Model.ManagementLayoutContent?.TitleText_AZ
+        }
+        else if (lang == "ru")
+        {
+            @Model.ManagementLayoutContent?.TitleText_RU
+        }
+        else if (lang == "en")
+        {
+            @Model.ManagementLayoutContent?.TitleText_EN
+        }
+        else if (lang == "tr")
+        {
+            @Model.ManagementLayoutContent?.TitleText_TR
+        }
+    </h1>
+    <section class="management position-relative mt-5">
+        <div class="container">
+            <div class="owl-carousel owl-theme">
+                @foreach (var management in Model.Managements)
+                {
+                    <div class="management-component">
+                        <div class="container">
+                            <div class="row justify-content-between">
+                                <div class="col-12 col-md-5 order-12 order-md-1">
+                                    @{
+                                        var photoPath = "/uploads/" + management.PhotoName;
+                                    }
+                                    <img class="w-100 management-image" src="@photoPath">
+                                    <a class="main-color-2 d-block d-md-none text-right mt-5">
+                                        @if (lang == "az")
+                                        {
+                                            @Model.ManagementLayoutContent?.BottomText_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Model.ManagementLayoutContent?.BottomText_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Model.ManagementLayoutContent?.BottomText_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Model.ManagementLayoutContent?.BottomText_TR
+                                        }
+                                    </a>
+                                </div>
+                                <div class="col-12 col-md-7 col-lg-6 order-1 order-md-12 d-flex align-items-center">
+                                    <div class="management-content">
+                                        <h1 class="management-content-title">
+                                            @if (lang == "az")
+                                            {
+                                                @management.Name_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @management.Name_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @management.Name_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @management.Name_TR
+                                            }
+                                        </h1>
+                                        <h3 class="management-content-duty">
+                                            @if (lang == "az")
+                                            {
+                                                @management.Duty_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @management.Duty_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @management.Duty_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @management.Duty_TR
+                                            }
+                                        </h3>
+                                        <div class="management-content-text mt-5">
+                                            @if (lang == "az")
+                                            {
+                                                @Html.Raw(management.About_AZ)
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Html.Raw(management.About_RU)
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Html.Raw(management.About_EN)
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Html.Raw(management.About_TR)
+                                            }
+                                        </div>
+                                        <a class="main-color-2 d-none d-md-block text-right mt-5">
+                                            @if (lang == "az")
+                                            {
+                                                @Model.ManagementLayoutContent?.BottomText_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.ManagementLayoutContent?.BottomText_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.ManagementLayoutContent?.BottomText_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.ManagementLayoutContent?.BottomText_TR
+                                            }
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial",Model.MobileMenuPartialViewModel)  
+
+@section Scripts{
+    <script src="~/js/governance.js"></script>
+}

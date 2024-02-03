@@ -1,0 +1,1184 @@
+﻿@model CareerViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Career";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "career";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/career" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/career" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/career" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/career" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/career" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/career" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/career" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/career" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="content-access career-access d-flex justify-content-center">
+                <div class="c-access active-access job-access main-color d-inline-block mr-5 position-relative">
+                    @{
+                        if (lang == "az")
+                        {
+                            @Model.ContentAccessComponent?.Access1_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.ContentAccessComponent?.Access1_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.ContentAccessComponent?.Access1_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.ContentAccessComponent?.Access1_TR
+                        }
+                    }
+                </div>
+                <div class="c-access intern-access main-color d-inline-block mr-5 position-relative">
+                    @{
+                        if (lang == "az")
+                        {
+                            @Model.ContentAccessComponent?.Access2_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.ContentAccessComponent?.Access2_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.ContentAccessComponent?.Access2_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.ContentAccessComponent?.Access2_TR
+                        }
+                    }
+                </div>
+                <div class="c-access general-access main-color d-inline-block position-relative">
+                    @{
+                        if (lang == "az")
+                        {
+                            @Model.ContentAccessComponent?.Access3_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.ContentAccessComponent?.Access3_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.ContentAccessComponent?.Access3_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.ContentAccessComponent?.Access3_TR
+                        }
+                    }
+                </div>
+            </div>
+            <div class="careerr job-career">
+                <div class="container">
+                    @{
+                        var order = 1;
+
+                        @foreach (var jobComponent in Model.JobComponents)
+                        {
+                            var photoPath = "/uploads/" + jobComponent.PhotoName;
+
+                            if (order % 2 == 1)
+                            {
+                                <div class="career-component main-color row">
+                                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center order-12 order-md-1 mt-3 mt-md-0">
+                                        <div class="career-component-text">
+                                            @if (lang == "az")
+                                            {
+                                                @Html.Raw(jobComponent.Content_AZ)
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Html.Raw(jobComponent.Content_RU)
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Html.Raw(jobComponent.Content_EN)
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Html.Raw(jobComponent.Content_TR)
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 d-flex align-items-center order-1 order-md-12">
+                                        <img class="w-100" src="@photoPath">
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="career-component main-color row">
+                                    <div class="col-12 col-md-6 d-flex align-items-center">
+                                        <img class="w-100" src="@photoPath">
+                                    </div>
+                                    <div class="col-12 col-md-6 d-flex align-items-center mt-3 mt-md-0">
+                                        <div class="career-component-text">
+                                            @if (lang == "az")
+                                            {
+                                                @Html.Raw(jobComponent.Content_AZ)
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Html.Raw(jobComponent.Content_RU)
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Html.Raw(jobComponent.Content_EN)
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Html.Raw(jobComponent.Content_TR)
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            order++;
+                        }
+
+                    }
+                    <div class="career-accordion accordion row" id="accordion-1">
+                        @{
+                            var orderr = 1;
+
+                            var jobOpportunities_1 = Model.JobOpportunities.Take(Model.JobOpportunities.Count / 2).ToList();
+                            var jobOpportunities_2 = Model.JobOpportunities.Skip(Model.JobOpportunities.Count / 2).Take(Model.JobOpportunities.Count - (Model.JobOpportunities.Count / 2)).ToList();
+
+                            <div class="col-12 col-lg-6">
+                                @foreach (var jobOpportunity in jobOpportunities_1)
+                                {
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-1-@orderr">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse-1-@orderr" aria-expanded="true" aria-controls="collapse-1-@orderr">
+                                                @if (lang == "az")
+                                                {
+                                                    @jobOpportunity.Title_AZ
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @jobOpportunity.Title_RU
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @jobOpportunity.Title_EN
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @jobOpportunity.Title_TR
+                                                }
+                                            </button>
+                                        </h2>
+                                        <div id="collapse-1-@orderr" class="accordion-collapse collapse" aria-labelledby="heading-1-@orderr"
+                                             data-bs-parent="#accordion-1">
+                                            <div class="accordion-body text-justify main-color">
+                                                @if (lang == "az")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_AZ)
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_RU)
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_EN)
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_TR)
+                                                }
+                                                <div opportunityid="@jobOpportunity.Id" class="apply-btn btn w-100 text-white py-2 mt-3">
+                                                    @if (lang == "az")
+                                                    {
+                                                        @jobOpportunity.ButtonText_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @jobOpportunity.ButtonText_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @jobOpportunity.ButtonText_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @jobOpportunity.ButtonText_TR
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    orderr++;
+                                }
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                @foreach (var jobOpportunity in jobOpportunities_2)
+                                {
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="heading-1-@orderr">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapse-1-@orderr" aria-expanded="true" aria-controls="collapse-1-@orderr">
+                                                @if (lang == "az")
+                                                {
+                                                    @jobOpportunity.Title_AZ
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @jobOpportunity.Title_RU
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @jobOpportunity.Title_EN
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @jobOpportunity.Title_TR
+                                                }
+                                            </button>
+                                        </h2>
+                                        <div id="collapse-1-@orderr" class="accordion-collapse collapse" aria-labelledby="heading-1-@orderr"
+                                             data-bs-parent="#accordion-1">
+                                            <div class="accordion-body text-justify main-color">
+                                                @if (lang == "az")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_AZ)
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_RU)
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_EN)
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @Html.Raw(jobOpportunity.Content_TR)
+                                                }
+                                                <div opportunityid="@jobOpportunity.Id" class="apply-btn btn w-100 text-white py-2 mt-3">
+                                                    @if (lang == "az")
+                                                    {
+                                                        @jobOpportunity.ButtonText_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @jobOpportunity.ButtonText_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @jobOpportunity.ButtonText_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @jobOpportunity.ButtonText_TR
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    orderr++;
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="careerr intern-career d-none">
+                <div class="container">
+                    <div class="container">
+                        @{
+                            var order_ = 1;
+
+                            @foreach (var internshipComponent in Model.InternshipComponents)
+                            {
+                                var photoPath = "/uploads/" + internshipComponent.PhotoName;
+
+                                if (order_ % 2 == 1)
+                                {
+                                    <div class="career-component main-color row">
+                                        <div class="col-12 col-md-6 d-flex flex-column justify-content-center order-12 order-md-1 mt-3 mt-md-0">
+                                            <div class="career-component-text">
+                                                @if (lang == "az")
+                                                {
+                                                    @Html.Raw(internshipComponent.Content_AZ)
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @Html.Raw(internshipComponent.Content_RU)
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @Html.Raw(internshipComponent.Content_EN)
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @Html.Raw(internshipComponent.Content_TR)
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 d-flex align-items-center order-1 order-md-12">
+                                            <img class="w-100" src="@photoPath">
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="career-component main-color row">
+                                        <div class="col-12 col-md-6 d-flex align-items-center">
+                                            <img class="w-100" src="@photoPath">
+                                        </div>
+                                        <div class="col-12 col-md-6 d-flex align-items-center mt-3 mt-md-0">
+                                            @if (lang == "az")
+                                            {
+                                                @Html.Raw(internshipComponent.Content_AZ)
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Html.Raw(internshipComponent.Content_RU)
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Html.Raw(internshipComponent.Content_EN)
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Html.Raw(internshipComponent.Content_TR)
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                order_++;
+                            }
+
+                        }
+                        <div class="career-accordion accordion row" id="accordion-2">
+                            @{
+                                var order__ = 1;
+
+
+                                var internshipOpportunities_1 = Model.InternshipOpportunities.Take(Model.InternshipOpportunities.Count / 2).ToList();
+                                var internshipOpportunities_2 = Model.InternshipOpportunities.Skip(Model.InternshipOpportunities.Count / 2).Take(Model.InternshipOpportunities.Count - (Model.InternshipOpportunities.Count / 2)).ToList();
+
+                                <div class="col-12 col-lg-6">
+                                    @foreach (var internshipOpportunity in internshipOpportunities_1)
+                                    {
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading-2-@order__">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse-2-@order__" aria-expanded="true" aria-controls="collapse-2-@order__">
+                                                    @if (lang == "az")
+                                                    {
+                                                        @internshipOpportunity.Title_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @internshipOpportunity.Title_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @internshipOpportunity.Title_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @internshipOpportunity.Title_TR
+                                                    }
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-2-@order__" class="accordion-collapse collapse" aria-labelledby="heading-2-@order__"
+                                                 data-bs-parent="#accordion-2">
+                                                <div class="accordion-body text-justify main-color">
+                                                    @if (lang == "az")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_AZ)
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_RU)
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_EN)
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_TR)
+                                                    }
+                                                    <div opportunityId="@internshipOpportunity.Id" class="apply-btn btn w-100 text-white py-2 mt-3">
+                                                        @if (lang == "az")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_AZ
+                                                        }
+                                                        else if (lang == "ru")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_RU
+                                                        }
+                                                        else if (lang == "en")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_EN
+                                                        }
+                                                        else if (lang == "tr")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_TR
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        order__++;
+                                    }
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    @foreach (var internshipOpportunity in internshipOpportunities_2)
+                                    {
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="heading-2-@order__">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse-2-@order__" aria-expanded="true" aria-controls="collapse-2-@order__">
+                                                    @if (lang == "az")
+                                                    {
+                                                        @internshipOpportunity.Title_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @internshipOpportunity.Title_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @internshipOpportunity.Title_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @internshipOpportunity.Title_TR
+                                                    }
+                                                </button>
+                                            </h2>
+                                            <div id="collapse-2-@order__" class="accordion-collapse collapse" aria-labelledby="heading-2-@orderr"
+                                                 data-bs-parent="#accordion-2">
+                                                <div class="accordion-body text-justify main-color">
+                                                    @if (lang == "az")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_AZ)
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_RU)
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_EN)
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @Html.Raw(internshipOpportunity.Content_TR)
+                                                    }
+                                                    <div opportunityId="@internshipOpportunity.Id" class="apply-btn btn w-100 text-white py-2 mt-3">
+                                                        @if (lang == "az")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_AZ
+                                                        }
+                                                        else if (lang == "ru")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_RU
+                                                        }
+                                                        else if (lang == "en")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_EN
+                                                        }
+                                                        else if (lang == "tr")
+                                                        {
+                                                            @internshipOpportunity.ButtonText_TR
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        order__++;
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="careerr general-career d-none">
+                <div class="row general-career-content justify-content-between">
+                    @if (Model.CareerFormComponent != null)
+                    {
+                        <div class="col-12 order-12 order-lg-1 mb-0 mb-lg-4 mt-4 mt-lg-0">
+                            <h1 class="apply-form-title main-color-2">
+                                @if (lang == "az")
+                                {
+                                    @Model.CareerFormComponent.Title_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @Model.CareerFormComponent.Title_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @Model.CareerFormComponent.Title_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @Model.CareerFormComponent.Title_TR
+                                }
+                            </h1>
+                        </div>
+                        <div class="col-12 col-lg-6 order-12 order-lg-1 mt-4 mt-lg-0">
+                            <form id="general-form" class="apply-form" action="" method="POST">
+                                <div class="row apply-form-inputs">
+                                    <div class="col-12 col-lg-6 mb-4">
+                                        @{
+                                            string placeholder_1 = string.Empty;
+
+                                            if (lang == "az")
+                                            {
+                                                placeholder_1 = Model.CareerFormComponent.Field1_AZ;
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                placeholder_1 = Model.CareerFormComponent.Field1_RU;
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                placeholder_1 = Model.CareerFormComponent.Field1_EN;
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                placeholder_1 = Model.CareerFormComponent.Field1_TR;
+                                            }
+                                            <input id="general-fullName" name="fullName" type="text" placeholder="@placeholder_1" class="apply-form-input " />
+                                        }
+                                    </div>
+                                    <div class="col-12 col-lg-6 mb-4">
+                                        @{
+                                            string placeholder_2 = string.Empty;
+
+                                            if (lang == "az")
+                                            {
+                                                placeholder_2 = Model.CareerFormComponent.Field2_AZ;
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                placeholder_2 = Model.CareerFormComponent.Field2_RU;
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                placeholder_2 = Model.CareerFormComponent.Field2_EN;
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                placeholder_2 = Model.CareerFormComponent.Field2_TR;
+                                            }
+                                            <input id="general-email" name="email" type="email" placeholder="@placeholder_2" class="apply-form-input">
+                                        }
+                                    </div>
+                                    <div class="col-12 col-lg-6 mb-4">
+                                        @{
+                                            string placeholder_3 = string.Empty;
+
+                                            if (lang == "az")
+                                            {
+                                                placeholder_3 = Model.CareerFormComponent.Field3_AZ;
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                placeholder_3 = Model.CareerFormComponent.Field3_RU;
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                placeholder_3 = Model.CareerFormComponent.Field3_EN;
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                placeholder_3 = Model.CareerFormComponent.Field3_TR;
+                                            }
+                                            <input id="general-position" name="position" type="text" placeholder="@placeholder_3" class="apply-form-input">
+                                        }
+                                    </div>
+                                    <div class="col-12 col-lg-6 mb-4">
+                                        <input name="cv" class="d-none form-file" accept=".pdf,.doc,.docx" type="file" id="general-cv-form-file" />
+                                        <label for="general-cv-form-file"
+                                               class="apply-form-file-input apply-form-input d-flex align-items-center justify-content-between">
+                                            <span>
+                                                @if (lang == "az")
+                                                {
+                                                    @Model.CareerFormComponent.Field4_AZ
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @Model.CareerFormComponent.Field4_RU
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @Model.CareerFormComponent.Field4_EN
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @Model.CareerFormComponent.Field4_TR
+                                                }
+                                            </span>
+                                            <span></span>
+                                            <img src="/img/plus.svg">
+                                        </label>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <input name="supportingFiles" multiple accept=".pdf,.doc,.docx" class="d-none form-file" type="file" id="general-supportingFiles-form-file" />
+                                        <label for="general-supportingFiles-form-file"
+                                               class="apply-form-file-input apply-form-input d-flex align-items-center justify-content-between">
+                                            <span>
+                                                @if (lang == "az")
+                                                {
+                                                    @Model.CareerFormComponent.Field5_AZ
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @Model.CareerFormComponent.Field5_RU
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @Model.CareerFormComponent.Field5_EN
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @Model.CareerFormComponent.Field5_TR
+                                                }
+                                            </span>
+                                            <span></span>
+                                            <img src="/img/plus.svg">
+                                        </label>
+                                    </div>
+                                    <div class="col-12 form-success-alert d-none">
+                                        <p class="alert alert-success">
+                                            @if (lang == "az")
+                                            {
+                                                @Model.CareerFormComponent.SuccessMessage_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.CareerFormComponent.SuccessMessage_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.CareerFormComponent.SuccessMessage_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.CareerFormComponent.SuccessMessage_TR
+                                            }
+                                        </p>
+                                    </div>
+                                    <div class="col-12 form-error-alert d-none">
+                                        <p class="alert alert-danger">
+                                            @if (lang == "az")
+                                            {
+                                                @Model.CareerFormComponent.ErrorMessage_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.CareerFormComponent.ErrorMessage_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.CareerFormComponent.ErrorMessage_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.CareerFormComponent.ErrorMessage_TR
+                                            }
+                                        </p>
+                                    </div>
+                                    <div class="col-12">
+                                        @{
+                                            string btnValue = string.Empty;
+
+                                            if (lang == "az")
+                                            {
+                                                btnValue = Model.CareerFormComponent.ButtonText_AZ;
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                btnValue = Model.CareerFormComponent.ButtonText_RU;
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                btnValue = Model.CareerFormComponent.ButtonText_EN;
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                btnValue = Model.CareerFormComponent.ButtonText_TR;
+                                            }
+                                            <button type="submit" class="btn apply-btn text-white py-3 w-100 text-center">
+                                                @btnValue
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                    @if (Model.CareerAppContent != null)
+                    {
+                        <div class="col-12 col-lg-5 order-1 order-lg-12">
+                            <div class="general-career-right-text-content">
+                                @if (lang == "az")
+                                {
+                                    @Html.Raw(Model.CareerAppContent.Content_AZ)
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @Html.Raw(Model.CareerAppContent.Content_RU)
+                                }
+                                else if (lang == "en")
+                                {
+                                    @Html.Raw(Model.CareerAppContent.Content_EN)
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @Html.Raw(Model.CareerAppContent.Content_TR)
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>*@
+        </div>
+    </section>
+    <section class="apply-form-section">
+        <div class="career-modal">
+            <div class="container h-100 d-flex align-items-center justify-content-center">
+                <div class="apply-form-wrapper position-relative">
+                    @if (Model.CareerFormComponent != null)
+                    {
+                        <form id="apply-form" class="apply-form" method="POST" enctype="multipart/form-data">
+                            <input id="opportunityId" name="opportunityId" hidden value="" />
+                            <h1 class="apply-form-title main-color-2 text-center">
+                                @if (lang == "az")
+                                {
+                                    @Model.CareerFormComponent.Title_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @Model.CareerFormComponent.Title_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @Model.CareerFormComponent.Title_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @Model.CareerFormComponent.Title_TR
+                                }
+                            </h1>
+                            <div class="row apply-form-inputs">
+                                <div class="col-12 col-lg-6 mb-4">
+                                    @{
+                                        string placeholder_1 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder_1 = Model.CareerFormComponent.Field1_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder_1 = Model.CareerFormComponent.Field1_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder_1 = Model.CareerFormComponent.Field1_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder_1 = Model.CareerFormComponent.Field1_TR;
+                                        }
+                                        <input name="fullName" id="fullName" type="text" placeholder="@placeholder_1" class="apply-form-input " />
+                                    }
+                                </div>
+                                <div class="col-12 col-lg-6 mb-4">
+                                    @{
+                                        string placeholder_2 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder_2 = Model.CareerFormComponent.Field2_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder_2 = Model.CareerFormComponent.Field2_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder_2 = Model.CareerFormComponent.Field2_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder_2 = Model.CareerFormComponent.Field2_TR;
+                                        }
+                                        <input name="email" id="email" type="email" placeholder="@placeholder_2" class="apply-form-input">
+                                    }
+                                </div>
+                                <div class="col-12 col-lg-6 mb-4">
+                                    @{
+                                        string placeholder_3 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder_3 = Model.CareerFormComponent.Field3_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder_3 = Model.CareerFormComponent.Field3_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder_3 = Model.CareerFormComponent.Field3_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder_3 = Model.CareerFormComponent.Field3_TR;
+                                        }
+                                        <input name="position" id="position" readonly type="text" placeholder="@placeholder_3" class="apply-form-input">
+                                    }
+                                </div>
+                                <div class="col-12 col-lg-6 mb-4">
+                                    <input name="cv" accept=".pdf,.doc,.docx" class="d-none form-file" type="file" id="cv-form-file" />
+                                    <label for="cv-form-file"
+                                           class="apply-form-file-input apply-form-input d-flex align-items-center justify-content-between">
+                                        <span>
+                                            @if (lang == "az")
+                                            {
+                                                @Model.CareerFormComponent.Field4_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.CareerFormComponent.Field4_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.CareerFormComponent.Field4_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.CareerFormComponent.Field4_TR
+                                            }
+                                        </span>
+                                        <span></span>
+                                        <img src="/img/plus.svg">
+                                    </label>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <input name="supportingFiles" accept=".pdf,.doc,.docx" multiple class="d-none form-file" type="file" id="supportingFiles-form-file" />
+                                    <label for="supportingFiles-form-file"
+                                           class="apply-form-file-input apply-form-input d-flex align-items-center justify-content-between">
+                                        <span>
+                                            @if (lang == "az")
+                                            {
+                                                @Model.CareerFormComponent.Field5_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.CareerFormComponent.Field5_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.CareerFormComponent.Field5_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.CareerFormComponent.Field5_TR
+                                            }
+                                        </span>
+                                        <span></span>
+                                        <img src="/img/plus.svg">
+                                    </label>
+                                </div>
+                                <div class="col-12 form-success-alert d-none">
+                                    <p class="alert alert-success">
+                                        @if (lang == "az")
+                                        {
+                                            @Model.CareerFormComponent.SuccessMessage_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Model.CareerFormComponent.SuccessMessage_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Model.CareerFormComponent.SuccessMessage_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Model.CareerFormComponent.SuccessMessage_TR
+                                        }
+                                    </p>
+                                </div>
+                                <div class="col-12 form-error-alert d-none">
+                                    <p class="alert alert-danger">
+                                        @if (lang == "az")
+                                        {
+                                            @Model.CareerFormComponent.ErrorMessage_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Model.CareerFormComponent.ErrorMessage_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Model.CareerFormComponent.ErrorMessage_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Model.CareerFormComponent.ErrorMessage_TR
+                                        }
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    @{
+                                        string btnValue = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            btnValue = Model.CareerFormComponent.ButtonText_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            btnValue = Model.CareerFormComponent.ButtonText_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            btnValue = Model.CareerFormComponent.ButtonText_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            btnValue = Model.CareerFormComponent.ButtonText_TR;
+                                        }
+                                        <button id="submit" class="btn apply-btn text-white py-3 w-100 text-center">
+                                            @btnValue
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    <img class="apply-form-close-icon position-absolute" src="/img/plus.svg">
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    <script src="~/js/career.js"></script>
+
+    <script>
+        $('form#apply-form').submit( function (e) {
+            e.preventDefault();
+
+            var fullName = $('#fullName').val();
+            var email = $('#email').val();
+            var opportunityId = $('#opportunityId').val();
+            var cvInput = $('#cv-form-file');
+            var cvCount = document.getElementById('cv-form-file').files.length;
+            var supportingFilesInput = $('#supportingFiles-form-file');
+
+            if (fullName == "" || email == "" || opportunityId == "" || cvCount == 0) {
+                $('#apply-form .form-error-alert').removeClass('d-none');
+            }
+            else {
+
+            var data = new FormData(this);
+
+            $.ajax({
+                url: "@Url.Action("add_opportunity_apply","career")",
+                data: data,
+                method: 'post',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    $('#apply-form .form-error-alert').addClass('d-none');
+                    $('#apply-form .form-success-alert').removeClass('d-none');
+                    setTimeout(function () {
+                        $('#apply-form .form-success-alert').addClass("d-none");
+                    }, 3000)
+
+                    $('#fullName').val('');
+                    $('#email').val('');
+                    $('#position').val('');
+                    $('#opportunityId').val('');
+                    $(cvInput).val('');
+                    $(cvInput).siblings().eq(0).children().eq(0).removeClass('d-none');
+                    $(cvInput).siblings().eq(0).children().eq(1).html('');
+                    $(supportingFilesInput).val('');
+                    $(supportingFilesInput).siblings().eq(0).children().eq(0).removeClass('d-none');
+                    $(supportingFilesInput).siblings().eq(0).children().eq(1).html('');
+                },
+                error: function () {
+                    $('#apply-form .form-alert').removeClass('d-none');
+                }
+            })
+            }
+        })
+
+        @*$('form#general-form').submit(function (e) {
+            e.preventDefault();
+
+            var fullName = $('general-#fullName').val();
+            var email = $('#general-email').val();
+            var position = $('#general-position').val();
+            var cvInput = $('#general-cv-form-file');
+            var cvCount = document.getElementById('general-cv-form-file').files.length;
+            var supportingFilesInput = $('#general-supportingFiles-form-file');
+
+            if (fullName == "" || email == "" || position == "" || cvCount == 0) {
+                $('#general-form .form-error-alert').removeClass('d-none');
+            }
+            else {
+
+            var data = new FormData(this);
+
+            $.ajax({
+                url: "@Url.Action("add_general_apply","career")",
+                data: data,
+                method: 'post',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    $('#general-form .form-error-alert').addClass('d-none');
+                    $('#general-form .form-success-alert').removeClass('d-none');
+                    setTimeout(function () {
+                        $('.form-success-alert').addClass("d-none");
+                    }, 3000)
+
+                    $('#general-fullName').val('');
+                    $('#general-email').val('');
+                    $('#general-position').val('');
+                    $(cvInput).val('');
+                    $(cvInput).siblings().eq(0).children().eq(0).removeClass('d-none');
+                    $(cvInput).siblings().eq(0).children().eq(1).html('');
+                    $(supportingFilesInput).val('');
+                    $(supportingFilesInput).siblings().eq(0).children().eq(0).removeClass('d-none');
+                    $(supportingFilesInput).siblings().eq(0).children().eq(1).html('');
+                },
+                error: function () {
+                    $('#general-form .general-form-alert').removeClass('d-none');
+                }
+            })
+            }
+        })*@
+    </script>
+}

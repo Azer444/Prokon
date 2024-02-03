@@ -1,0 +1,90 @@
+﻿@model MainPhotoEditViewModel
+
+@{
+    ViewData["Title"] = "Privacy Main Photo";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <h1 class="main-color">Edit Main Photo</h1>
+                <form asp-action="edit_main_photo" asp-controller="privacy" asp-area="admin" method="post" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row main-color">
+                            <div class="col-12 mt-3">
+                                <h3 class="main-color">Title</h3>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Title_AZ" class="control-label"></label>
+                                    <input asp-for="Title_AZ" class="form-control">
+                                    <span asp-validation-for="Title_AZ" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Title_RU" class="control-label"></label>
+                                    <input asp-for="Title_RU" class="form-control">
+                                    <span asp-validation-for="Title_RU" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Title_EN" class="control-label"></label>
+                                    <input asp-for="Title_EN" class="form-control">
+                                    <span asp-validation-for="Title_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Title_TR" class="control-label"></label>
+                                    <input asp-for="Title_TR" class="form-control">
+                                    <span asp-validation-for="Title_TR" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <h3 class="main-color">Photo</h3>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @{
+                                        var photoPath = "/uploads/" + Model.PhotoName;
+                                    }
+                                    <label class="d-flex m-0 bold-text" for=""><span>Photo</span></label>
+                                    <img class="table-image-item mb-3" src="@photoPath" />
+                                    <div class="custom-file">
+                                        <input asp-for="Photo" class="form-control custom-file-input" accept="image/*" />
+                                        <label class="custom-file-label">
+                                            Change photo...
+                                        </label>
+                                    </div>
+                                    <span class="text-danger validate-message d-inline-block py-2" asp-validation-for="Photo"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group text-center">
+                                    <input type="submit" value="Edit" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <a asp-action="index" asp-controller="privacy" class="main-color">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/show_file_name.js"></script>
+    <!-- validate js -->
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

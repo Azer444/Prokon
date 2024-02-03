@@ -1,0 +1,237 @@
+﻿@model LicenceViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Licence";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "licence";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section licence-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/licence" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/licence" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/licence" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/licence" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/licence" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/licence" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/licence" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/licence" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="content-access licence-access d-flex justify-content-center">
+                @if (Model.Az_Licences.Count > 0)
+                {
+                    <div class="c-access active-access az-access main-color d-inline-block mr-5 position-relative">
+                        @{
+                            if (lang == "az")
+                            {
+                                @Model.ContentAccessComponent?.Access1_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @Model.ContentAccessComponent?.Access1_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @Model.ContentAccessComponent?.Access1_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @Model.ContentAccessComponent?.Access1_TR
+                            }
+                        }
+                    </div>
+                }
+                @if (Model.Tr_Licences.Count > 0)
+                {
+                    <div class="c-access tr-access main-color d-inline-block mr-5 position-relative">
+                        @{
+                            if (lang == "az")
+                            {
+                                @Model.ContentAccessComponent?.Access2_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @Model.ContentAccessComponent?.Access2_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @Model.ContentAccessComponent?.Access2_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @Model.ContentAccessComponent?.Access2_TR
+                            }
+                        }
+                    </div>
+                }
+                @if (Model.Ru_Licences.Count > 0)
+                {
+                    <div class="c-access ru-access main-color d-inline-block position-relative">
+                        @{
+                            if (lang == "az")
+                            {
+                                @Model.ContentAccessComponent?.Access3_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @Model.ContentAccessComponent?.Access3_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @Model.ContentAccessComponent?.Access3_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @Model.ContentAccessComponent?.Access3_TR
+                            }
+                        }
+                    </div>
+                }
+            </div>
+            <div class="row licence-components az-licences">
+                @foreach (var licence in Model.Az_Licences)
+                {
+                    var pdfPath = "/uploads/" + licence.PDFName;
+                    var photoPath = "/uploads/" + licence.PhotoName;
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <a href="@pdfPath" target="_blank" class="licence-component d-flex align-items-center justify-content-center">
+                            <div class="licence-component-wrapper">
+                                <img src="@photoPath">
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="row licence-components tr-licences d-none">
+                @foreach (var licence in Model.Tr_Licences)
+                {
+                    var pdfPath = "/uploads/" + licence.PDFName;
+                    var photoPath = "/uploads/" + licence.PhotoName;
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <a href="@pdfPath" target="_blank" class="licence-component d-flex align-items-center justify-content-center">
+                            <div class="licence-component-wrapper">
+                                <img src="@photoPath">
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="row licence-components ru-licences d-none">
+                @foreach (var licence in Model.Ru_Licences)
+                {
+                    var pdfPath = "/uploads/" + licence.PDFName;
+                    var photoPath = "/uploads/" + licence.PhotoName;
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <a href="@pdfPath" target="_blank" class="licence-component d-flex align-items-center justify-content-center">
+                            <div class="licence-component-wrapper">
+                                <img src="@photoPath">
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    <script src="~/js/licence.js"></script>
+}

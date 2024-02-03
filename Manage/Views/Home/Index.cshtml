@@ -1,0 +1,748 @@
+﻿@model HomeViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon";
+    ViewData["Image"] = "img/meta-logo.jpg";
+    ViewData["Description"] = "PROKON is a full service construction company specialized in management of integrated infrastructure, industrial plants and facilities construction processes from design adaptation to procurement and construction.";
+    ViewData["Link"] = "home";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="banner position-relative">
+        <div class="owl-carousel owl-theme">
+            @foreach (var sliderComponent in Model.SliderComponents)
+            {
+                var photoPath = "/uploads/" + sliderComponent.PhotoName;
+
+                <div class="banner-image position-relative" style="background-image: url('@photoPath');">
+                    <div class="cover">
+                        <div class="container">
+                            <div class="banner-content position-absolute text-white">
+                                <p class="banner-title font-weight-bold">
+                                    @{
+                                        if (lang == "az")
+                                        {
+                                            @Html.Raw(sliderComponent.Title_AZ)
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Html.Raw(sliderComponent.Title_RU)
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Html.Raw(sliderComponent.Title_EN)
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Html.Raw(sliderComponent.Title_TR)
+                                        }
+                                    }
+                                </p>
+                                @{
+                                    if (lang == "az" && !string.IsNullOrEmpty(sliderComponent.ButtonText_AZ))
+                                    {
+                                        <a href="@sliderComponent.Link" class="main-button d-flex justify-content-center align-items-center mt-4">
+                                            <span>@sliderComponent.ButtonText_AZ</span>
+                                        </a>
+                                    }
+                                    else if (lang == "ru" && !string.IsNullOrEmpty(sliderComponent.ButtonText_RU))
+                                    {
+                                        <a href="@sliderComponent.Link" class="main-button d-flex justify-content-center align-items-center mt-4">
+                                            <span>@sliderComponent.ButtonText_RU</span>
+                                        </a>
+                                    }
+                                    else if (lang == "en" && !string.IsNullOrEmpty(sliderComponent.ButtonText_EN))
+                                    {
+                                        <a href="@sliderComponent.Link" class="main-button d-flex justify-content-center align-items-center mt-4">
+                                            <span>@sliderComponent.ButtonText_EN</span>
+                                        </a>
+                                    }
+                                    else if (lang == "tr" && !string.IsNullOrEmpty(sliderComponent.ButtonText_TR))
+                                    {
+                                        <a href="@sliderComponent.Link" class="main-button d-flex justify-content-center align-items-center mt-4">
+                                            <span>@sliderComponent.ButtonText_TR</span>
+                                        </a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+    <section class="our-project">
+        <div class="our-project-top">
+            <div class="our-project-top-content pt-5 text-center">
+                <div class="py-3">
+                    @{
+                        var projectSectionTitleContent = Model.SectionLayoutContents.FirstOrDefault(c => c.SectionName == "project");
+                    }
+                    @if (projectSectionTitleContent != null)
+                    {
+                        <h1 class="main-color section-title">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @projectSectionTitleContent.TitleText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @projectSectionTitleContent.TitleText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @projectSectionTitleContent.TitleText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @projectSectionTitleContent.TitleText_TR
+                                }
+                            }
+                        </h1>
+
+                        <span class="main-color our-project-top-text">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @projectSectionTitleContent.HelperText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @projectSectionTitleContent.HelperText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @projectSectionTitleContent.HelperText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @projectSectionTitleContent.HelperText_TR
+                                }
+                            }
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="our-project-bottom">
+            <div class="owl-carousel owl-theme">
+                @foreach (var project in Model.Projects)
+                {
+                    <div class="our-project-item">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="our-project-bottom-left h-100 d-flex align-items-center">
+                                        <div class="our-project-bottom-left-content">
+                                            <p class="project-title">
+                                                @{
+                                                    if (lang == "az")
+                                                    {
+                                                        @project.Name_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @project.Name_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @project.Name_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @project.Name_TR
+                                                    }
+                                                }
+                                            </p>
+                                            <div class="project-content">
+                                                @{
+                                                    if (lang == "az")
+                                                    {
+                                                        @project.Location_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @project.Location_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @project.Location_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @project.Location_TR
+                                                    }
+                                                }
+                                            </div>
+                                            <a asp-action="details" asp-controller="project" asp-route-id="@project.Slug" class="main-button our-project-button d-flex justify-content-center align-items-center mt-5">
+                                                @if (lang == "az")
+                                                {
+                                                    <span>Ətraflı</span>
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    <span>Подробности</span>
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    <span>More</span>
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    <span>Detaylar</span>
+                                                }
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 mt-5 mt-md-0 d-flex justify-content-center">
+                                    @{
+                                        var mainPhotoPath = "/uploads/" + project.TitlePhotoName;
+                                        <div class="project-main-photo-container d-flex align-items-center">
+                                            <img src="@mainPhotoPath" class="project-main-photo">
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <section class="news">
+        <div class="container">
+            <div class="news-section-top">
+                @{
+                    var newsSectionTitleContent = Model.SectionLayoutContents.FirstOrDefault(c => c.SectionName == "news");
+                }
+                @{
+                    if (newsSectionTitleContent != null)
+                    {
+                        <h1 class="main-color section-title">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @newsSectionTitleContent.TitleText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @newsSectionTitleContent.TitleText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @newsSectionTitleContent.TitleText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @newsSectionTitleContent.TitleText_TR
+                                }
+                            }
+                        </h1>
+                        <p class="main-color section-text mt-3 mb-5">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @newsSectionTitleContent.HelperText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @newsSectionTitleContent.HelperText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @newsSectionTitleContent.HelperText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @newsSectionTitleContent.HelperText_TR
+                                }
+                            }
+                        </p>
+                    }
+                }
+            </div>
+            <div class="news-section-center">
+                <div class="row">
+                    @foreach (var news in Model.News)
+                    {
+                        var photoPath = "/uploads/" + news.PhotoName;
+                        <div class="col-12 col-md-6 mb-5">
+                            @{
+                                var link = "/" + lang + "/news/details/" + news.Slug;
+                            }
+                            <div class="news-component position-relative">
+                                <a href="@link" class="news-component-anchor"></a>
+                                <div class="news-component-top w-100"
+                                     style="background-image: url('@photoPath');">
+                                </div>
+                                <div class="news-component-bottom">
+                                    <div class="news-component-bottom-content">
+                                        <p class="main-color news-component-bottom-content-title">
+                                            @{
+                                                if (lang == "az")
+                                                {
+                                                    @news.Title_AZ
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @news.Title_RU
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @news.Title_EN
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @news.Title_TR
+                                                }
+                                            }
+                                        </p>
+                                        <div class="main-color news-component-bottom-content-text">
+                                            @{
+                                                if (lang == "az")
+                                                {
+                                                    @Html.Raw(news.Content_AZ)
+                                                }
+                                                else if (lang == "ru")
+                                                {
+                                                    @Html.Raw(news.Content_RU)
+                                                }
+                                                else if (lang == "en")
+                                                {
+                                                    @Html.Raw(news.Content_EN)
+                                                }
+                                                else if (lang == "tr")
+                                                {
+                                                    @Html.Raw(news.Content_TR)
+                                                }
+                                            }
+                                        </div>
+                                        <div class="news-component-bottom__bottom d-flex justify-content-between mt-5">
+                                            <p class="main-color-2 news-location">
+                                                @{
+                                                    if (lang == "az")
+                                                    {
+                                                        @news.Location_AZ
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        @news.Location_RU
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        @news.Location_EN
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        @news.Location_TR
+                                                    }
+                                                }
+                                            </p>
+                                            <p class="main-color-2 news-date">
+                                                @news.CreatedAt.ToString("dd.MM.yyyy")
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="news-section-bottom">
+                    <div class="d-flex justify-content-end w-100 mt-3 mr-3">
+                        <a asp-action="index" asp-controller="press" class="main-color-2 view-more">
+                            @{
+                                if (newsSectionTitleContent != null)
+                                {
+                                    if (lang == "az")
+                                    {
+                                        @newsSectionTitleContent.BottomText_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @newsSectionTitleContent.BottomText_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @newsSectionTitleContent.BottomText_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @newsSectionTitleContent.BottomText_TR
+                                    }
+                                }
+                            }
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="licence position-relative">
+        <div class="container">
+            <div class="licence-section-top">
+                @{
+                    var licenceSectionTitleContent = Model.SectionLayoutContents.FirstOrDefault(c => c.SectionName == "licence");
+                }
+                @{
+                    if (licenceSectionTitleContent != null)
+                    {
+                        <h1 class="main-color section-title">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @licenceSectionTitleContent.TitleText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @licenceSectionTitleContent.TitleText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @licenceSectionTitleContent.TitleText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @licenceSectionTitleContent.TitleText_TR
+                                }
+                            }
+                        </h1>
+                        <p class="main-color section-text mt-4">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @licenceSectionTitleContent.HelperText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @licenceSectionTitleContent.HelperText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @licenceSectionTitleContent.HelperText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @licenceSectionTitleContent.HelperText_TR
+                                }
+                            }
+                        </p>
+                    }
+                }
+            </div>
+            <div class="licence-section-center mt-5">
+                <div class="owl-carousel owl-theme">
+                    @foreach (var licence in Model.Licences)
+                    {
+                        var photoPath = "/uploads/" + licence.PhotoName;
+                        var pdfPath = "/uploads/" + licence.PDFName;
+
+                        <a href="@pdfPath" target="_blank" class="licence-component d-flex align-items-center justify-content-center mx-2">
+                            <div class="licence-component-content d-flex justify-content-center">
+                                <img src="@photoPath" class="licence-component-image">
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="licence-section-bottom text-right">
+                <a asp-action="index" asp-controller="licence" class="main-color-2 view-more mr-2">
+                    @{
+                        if (licenceSectionTitleContent != null)
+                        {
+                            if (lang == "az")
+                            {
+                                @licenceSectionTitleContent.BottomText_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @licenceSectionTitleContent.BottomText_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @licenceSectionTitleContent.BottomText_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @licenceSectionTitleContent.BottomText_TR
+                            }
+                        }
+                    }
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="gallery">
+        <div class="container">
+            <div class="gallery-section-top">
+                @{
+                    var gallerySectionTitleContent = Model.SectionLayoutContents.FirstOrDefault(c => c.SectionName == "gallery");
+                }
+                @{
+                    if (gallerySectionTitleContent != null)
+                    {
+                        <h1 class="main-color section-title text-center">
+                            @{
+                                if (lang == "az")
+                                {
+                                    @gallerySectionTitleContent.TitleText_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @gallerySectionTitleContent.TitleText_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @gallerySectionTitleContent.TitleText_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @gallerySectionTitleContent.TitleText_TR
+                                }
+                            }
+                        </h1>
+                        <div class="main-color gallery-section-text mt-3 d-flex justify-content-center">
+                            <span class="w-50 text-center">
+                                @{
+                                    if (lang == "az")
+                                    {
+                                        @gallerySectionTitleContent.HelperText_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @gallerySectionTitleContent.HelperText_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @gallerySectionTitleContent.HelperText_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @gallerySectionTitleContent.HelperText_TR
+                                    }
+                                }
+                            </span>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="gallery-section-center row mt-3">
+                @{
+                    var photo1 = Model.GalleryComponents.FirstOrDefault(gc => gc.Order == 1);
+                    string photo1path = null;
+
+                    if (photo1 != null)
+                        photo1path = "/uploads/" + photo1.TitlePhotoName;
+
+                    <div class="col-12 my-1 col-sm-6 px-sm-1 px-md-0">
+                        <img class="gallery-component w-100" order="1" src="@photo1path" />
+                    </div>
+
+                    var photo2 = Model.GalleryComponents.FirstOrDefault(gc => gc.Order == 2);
+                    string photo2path = null;
+
+                    if (photo2 != null)
+                        photo2path = "/uploads/" + photo2.TitlePhotoName;
+
+                    <div class="col-12 my-1 col-sm-6 col-md-4 px-sm-1 px-md-2">
+                        <img class="gallery-component w-100" order="2" src="@photo2path" />
+                    </div>
+
+                    var photo3 = Model.GalleryComponents.FirstOrDefault(gc => gc.Order == 3);
+                    string photo3path = null;
+
+                    if (photo3 != null)
+                        photo3path = "/uploads/" + photo3.TitlePhotoName;
+
+                    <div class="col-12 my-1 col-sm-6 col-md-2 px-sm-1 px-md-0">
+                        <img class="gallery-component w-100" order="3" src="@photo3path" />
+                    </div>
+
+                    var photo4 = Model.GalleryComponents.FirstOrDefault(gc => gc.Order == 4);
+                    string photo4path = null;
+
+                    if (photo4 != null)
+                        photo4path = "/uploads/" + photo4.TitlePhotoName;
+
+                    <div class="col-12 my-1 col-sm-6 col-md-3 mt-md-1 px-sm-1 px-md-0">
+                        <img class="gallery-component w-100" order="4" src="@photo4path" />
+                    </div>
+
+                    var photo5 = Model.GalleryComponents.FirstOrDefault(gc => gc.Order == 5);
+                    string photo5path = null;
+
+                    if (photo5 != null)
+                        photo5path = "/uploads/" + photo5.TitlePhotoName;
+
+                    <div class="col-12 my-1 col-sm-6 col-md-4 mt-md-1 px-sm-1 px-md-2">
+                        <img class="gallery-component w-100" order="5" src="@photo5path" />
+                    </div>
+
+                    var photo6 = Model.GalleryComponents.FirstOrDefault(gc => gc.Order == 6);
+                    string photo6path = null;
+
+                    if (photo6 != null)
+                        photo6path = "/uploads/" + photo6.TitlePhotoName;
+
+                    <div class="col-12 my-1 col-sm-6 col-md-5 mt-md-1 px-sm-1 px-md-0">
+                        <img class="gallery-component w-100" order="6" src="@photo6path" />
+                    </div>
+                }
+            </div>
+            <div class="gallery-section-bottom text-right">
+                <a asp-action="index" asp-controller="gallery" class="main-color-2 view-more">
+                    @if (gallerySectionTitleContent != null)
+                    {
+                        if (lang == "az")
+                        {
+                            @gallerySectionTitleContent.BottomText_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @gallerySectionTitleContent.BottomText_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @gallerySectionTitleContent.BottomText_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @gallerySectionTitleContent.BottomText_TR
+                        }
+                    }
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="career">
+        <div class="container">
+            <div class="career-content text-center">
+                @{
+                    var careerSectionLayoutContent = Model.SectionLayoutContents.FirstOrDefault(c => c.SectionName == "career");
+                }
+                @if (careerSectionLayoutContent != null)
+                {
+                    <p class="career-content-title">
+                        @if (lang == "az")
+                        {
+                            @Html.Raw(careerSectionLayoutContent.TitleText_AZ)
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Html.Raw(careerSectionLayoutContent.TitleText_RU)
+                        }
+                        else if (lang == "en")
+                        {
+                            @Html.Raw(careerSectionLayoutContent.TitleText_EN)
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Html.Raw(careerSectionLayoutContent.TitleText_TR)
+                        }
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <a asp-action="index" asp-controller="career" class="main-button d-flex justify-content-center align-items-center get-touch">
+                            @if (lang == "az")
+                            {
+                                @careerSectionLayoutContent.HelperText_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @careerSectionLayoutContent.HelperText_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @careerSectionLayoutContent.HelperText_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @careerSectionLayoutContent.HelperText_TR
+                            }
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <section class="gallery-collection d-flex">
+        <div class="gallery-modal">
+            @{
+                foreach (var galleryComponent in Model.GalleryComponents)
+                {
+                    <div class="gallery-component-collection" order="@galleryComponent.Order">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-md-3">
+                                    @if (lang == "az")
+                                    {
+                                        <p class="d-block d-md-none">@galleryComponent.Title_AZ</p>
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        <p class="d-block d-md-none">@galleryComponent.Title_RU</p>
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        <p class="d-block d-md-none">@galleryComponent.Title_EN</p>
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        <p class="d-block d-md-none">@galleryComponent.Title_TR</p>
+                                    }
+
+                                    <div class="thumbnails">
+                                        @{
+                                            var mainPhotoPath = "/uploads/" + galleryComponent.TitlePhotoName;
+                                        }
+                                        <img class="thumbnail mb-3" order="@galleryComponent.Order" src="@mainPhotoPath" />
+                                        @foreach (var galleryComponentPhoto in galleryComponent.GalleryComponentPhotos)
+                                        {
+                                            var photoPath = "/uploads/" + galleryComponentPhoto.PhotoName;
+                                            <img class="thumbnail mb-3" order="@galleryComponent.Order" src="@photoPath" />
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-9 d-none d-md-block">
+                                    @{
+                                        var activePhotoPath = "/uploads/" + galleryComponent.TitlePhotoName;
+                                    }
+                                    <div class="gallery-active-photo" order="@galleryComponent.Order">
+                                        <img src="@activePhotoPath" />
+                                    </div>
+                                    @if (lang == "az")
+                                    {
+                                        <p>@galleryComponent.Title_AZ</p>
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        <p>@galleryComponent.Title_RU</p>
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        <p>@galleryComponent.Title_EN</p>
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        <p>@galleryComponent.Title_TR</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    <script src="~/js/home.js"></script>
+}

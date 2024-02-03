@@ -1,0 +1,434 @@
+﻿@model SitemapViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Sitemap";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "sitemap";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/sitemap" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/sitemap" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/sitemap" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/sitemap" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/sitemap" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/sitemap" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/sitemap" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/sitemap" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="row sitemap-components">
+                @{
+                    var navTitleComponents_1 = Model.NavTitleComponents.Take(Model.NavTitleComponents.Count / 2).ToList();
+                    var navTitleComponents_2 = Model.NavTitleComponents.Skip(Model.NavTitleComponents.Count / 2).Take(Model.NavTitleComponents.Count - (Model.NavTitleComponents.Count / 2)).ToList();
+                    var order = 2;
+                }
+                <div class="col-12 col-md-6">
+                    <div class="sitemap-component">
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="sitemap-component-order mt-2">01</p>
+                            </div>
+                            <div class="col-10">
+                                <a href="/@lang/home" class="sitemap-component-title">
+                                    @if (lang == "az")
+                                    {
+                                        <span>Ana səhifə</span>
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        <span>
+                                            Домашняя страница
+                                        </span>
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        <span>
+                                            Home
+                                        </span>
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        <span>
+                                            Ana sayfa
+                                        </span>
+                                    }
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @foreach (var navTitleComponent in navTitleComponents_1)
+                    {
+                        <div class="sitemap-component">
+                            <div class="row">
+                                @if (navTitleComponent.NavComponents.Count > 0)
+                                {
+                                    <div class="col-2">
+                                        <p class="sitemap-component-order">@order.ToString("00")</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-2">
+                                        <p class="sitemap-component-order mt-2">@order.ToString("00")</p>
+                                    </div>
+                                }
+                                <div class="col-10">
+                                    @if (navTitleComponent.NavComponents.Count > 0)
+                                    {
+                                        <h1 class="sitemap-component-title">
+                                            @if (lang == "az")
+                                            {
+                                                @navTitleComponent.Title_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @navTitleComponent.Title_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @navTitleComponent.Title_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @navTitleComponent.Title_TR
+                                            }
+                                        </h1>
+                                        <div class="sitemap-component-subtitles">
+                                            @foreach (var navComponent in navTitleComponent.NavComponents)
+                                            {
+                                                <div class="sitemap-component-subtitle-component">
+                                                    @if (navComponent.NavSubComponents.Count > 0)
+                                                    {
+                                                        <a class="sitemap-component-subtitle">
+                                                            @if (lang == "az")
+                                                            {
+                                                                @navComponent.Title_AZ
+                                                            }
+                                                            else if (lang == "ru")
+                                                            {
+                                                                @navComponent.Title_RU
+                                                            }
+                                                            else if (lang == "en")
+                                                            {
+                                                                @navComponent.Title_EN
+                                                            }
+                                                            else if (lang == "tr")
+                                                            {
+                                                                @navComponent.Title_TR
+                                                            }
+                                                        </a>
+                                                        <div class="sitemap-component-subtitle-categories">
+                                                            @foreach (var navSubComponent in navComponent.NavSubComponents)
+                                                            {
+                                                                <a href="/@lang/@navSubComponent.Link" class="sitemap-component-subtitle-category">
+                                                                    @if (lang == "az")
+                                                                    {
+                                                                        @navSubComponent.Title_AZ
+                                                                    }
+                                                                    else if (lang == "ru")
+                                                                    {
+                                                                        @navSubComponent.Title_RU
+                                                                    }
+                                                                    else if (lang == "en")
+                                                                    {
+                                                                        @navSubComponent.Title_EN
+                                                                    }
+                                                                    else if (lang == "tr")
+                                                                    {
+                                                                        @navSubComponent.Title_TR
+                                                                    }
+                                                                </a>
+                                                            }
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="/@lang/@navComponent.Link" class="sitemap-component-subtitle">
+                                                            @if (lang == "az")
+                                                            {
+                                                                @navComponent.Title_AZ
+                                                            }
+                                                            else if (lang == "ru")
+                                                            {
+                                                                @navComponent.Title_RU
+                                                            }
+                                                            else if (lang == "en")
+                                                            {
+                                                                @navComponent.Title_EN
+                                                            }
+                                                            else if (lang == "tr")
+                                                            {
+                                                                @navComponent.Title_TR
+                                                            }
+                                                        </a>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a href="/@lang/@navTitleComponent.Link" class="sitemap-component-title">
+                                            @if (lang == "az")
+                                            {
+                                                @navTitleComponent.Title_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @navTitleComponent.Title_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @navTitleComponent.Title_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @navTitleComponent.Title_TR
+                                            }
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        order++;
+                    }
+                </div>
+                <div class="col-12 col-md-6">
+                    @foreach (var navTitleComponent in navTitleComponents_2)
+                    {
+                        <div class="sitemap-component">
+                            <div class="row">
+                                @if (navTitleComponent.NavComponents.Count > 0)
+                                {
+                                    <div class="col-2">
+                                        <p class="sitemap-component-order">@order.ToString("00")</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-2">
+                                        <p class="sitemap-component-order mt-2">@order.ToString("00")</p>
+                                    </div>
+                                }
+                                <div class="col-10">
+                                    @if (navTitleComponent.NavComponents.Count > 0)
+                                    {
+                                        <h1 class="sitemap-component-title">
+                                            @if (lang == "az")
+                                            {
+                                                @navTitleComponent.Title_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @navTitleComponent.Title_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @navTitleComponent.Title_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @navTitleComponent.Title_TR
+                                            }
+                                        </h1>
+                                        <div class="sitemap-component-subtitles">
+                                            @foreach (var navComponent in navTitleComponent.NavComponents)
+                                            {
+                                                <div class="sitemap-component-subtitle-component">
+                                                    @if (navComponent.NavSubComponents.Count > 0)
+                                                    {
+                                                        <a class="sitemap-component-subtitle">
+                                                            @if (lang == "az")
+                                                            {
+                                                                @navComponent.Title_AZ
+                                                            }
+                                                            else if (lang == "ru")
+                                                            {
+                                                                @navComponent.Title_RU
+                                                            }
+                                                            else if (lang == "en")
+                                                            {
+                                                                @navComponent.Title_EN
+                                                            }
+                                                            else if (lang == "tr")
+                                                            {
+                                                                @navComponent.Title_TR
+                                                            }
+                                                        </a>
+                                                        <div class="sitemap-component-subtitle-categories">
+                                                            @foreach (var navSubComponent in navComponent.NavSubComponents)
+                                                            {
+                                                                <a href="/@lang/@navSubComponent.Link" class="sitemap-component-subtitle-category">
+                                                                    @if (lang == "az")
+                                                                    {
+                                                                        @navSubComponent.Title_AZ
+                                                                    }
+                                                                    else if (lang == "ru")
+                                                                    {
+                                                                        @navSubComponent.Title_RU
+                                                                    }
+                                                                    else if (lang == "en")
+                                                                    {
+                                                                        @navSubComponent.Title_EN
+                                                                    }
+                                                                    else if (lang == "tr")
+                                                                    {
+                                                                        @navSubComponent.Title_TR
+                                                                    }
+                                                                </a>
+                                                            }
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="/@lang/@navComponent.Link" class="sitemap-component-subtitle">
+                                                            @if (lang == "az")
+                                                            {
+                                                                @navComponent.Title_AZ
+                                                            }
+                                                            else if (lang == "ru")
+                                                            {
+                                                                @navComponent.Title_RU
+                                                            }
+                                                            else if (lang == "en")
+                                                            {
+                                                                @navComponent.Title_EN
+                                                            }
+                                                            else if (lang == "tr")
+                                                            {
+                                                                @navComponent.Title_TR
+                                                            }
+                                                        </a>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a href="/@lang/@navTitleComponent.Link" class="sitemap-component-title">
+                                            @if (lang == "az")
+                                            {
+                                                @navTitleComponent.Title_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @navTitleComponent.Title_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @navTitleComponent.Title_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @navTitleComponent.Title_TR
+                                            }
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        order++;
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)

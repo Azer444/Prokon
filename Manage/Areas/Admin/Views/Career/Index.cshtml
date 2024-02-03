@@ -1,0 +1,197 @@
+﻿@model CareerIndexViewModel
+
+@{
+    ViewData["Title"] = "Career";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Career</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Job Opportunities</h2>
+
+                        <h4 class="main-color">Opportunities</h4>
+                        <a href="/admin/career/add_job_opportunity" class="btn btn-primary mb-3">Add Opportunity</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Title (AZ)</th>
+                                        <th class="main-color text-center">Title (RU)</th>
+                                        <th class="main-color text-center">Title (EN)</th>
+                                        <th class="main-color text-center">Title (TR)</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var jobOpportunity in Model.JobOpportunities)
+                                    {
+                                        <tr id="@jobOpportunity.Id">
+                                            <td class="text-center">@jobOpportunity.Title_AZ</td>
+                                            <td class="text-center">@jobOpportunity.Title_RU</td>
+                                            <td class="text-center">@jobOpportunity.Title_EN</td>
+                                            <td class="text-center">@jobOpportunity.Title_TR</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary mx-2" href="/admin/career/opportunity_applies/@jobOpportunity.Id">Applies</a>
+                                                    <a class="btn btn-primary" href="/admin/career/edit_job_opportunity/@jobOpportunity.Id">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/career/details_job_opportunity/@jobOpportunity.Id">Details</a>
+                                                    <a class="btn btn-danger delete-job-opportunity text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <br />
+
+                        <h2 class="main-color">Internship Opportunities</h2>
+
+                        <h4 class="main-color">Opportunities</h4>
+                        <a href="/admin/career/add_internship_opportunity" class="btn btn-primary mb-3">Add Opportunity</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Title (AZ)</th>
+                                        <th class="main-color text-center">Title (RU)</th>
+                                        <th class="main-color text-center">Title (EN)</th>
+                                        <th class="main-color text-center">Title (TR)</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var internshipOpportunity in Model.InternshipOpportunities)
+                                    {
+                                        <tr id="@internshipOpportunity.Id">
+                                            <td class="text-center">@internshipOpportunity.Title_AZ</td>
+                                            <td class="text-center">@internshipOpportunity.Title_RU</td>
+                                            <td class="text-center">@internshipOpportunity.Title_EN</td>
+                                            <td class="text-center">@internshipOpportunity.Title_TR</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary mx-2" href="/admin/career/opportunity_applies/@internshipOpportunity.Id">Applies</a>
+                                                    <a class="btn btn-primary" href="/admin/career/edit_internship_opportunity/@internshipOpportunity.Id">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/career/details_internship_opportunity/@internshipOpportunity.Id">Details</a>
+                                                    <a class="btn btn-danger delete-internship-opportunity text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @*<br />
+
+                        <h2 class="main-color">General Application</h2>
+                        <h4 class="main-color">Applies</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Full Name</th>
+                                            <th class="main-color text-center">Email</th>
+                                            <th class="main-color text-center">Position</th>
+                                            <th class="main-color text-center">CV</th>
+                                            <th class="main-color text-center">Supporting Files</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var generalApply in Model.GeneralApplies)
+                                        {
+                                            var pdfPath = "/uploads/" + generalApply.CVName;
+
+                                        <tr id="@generalApply.Id">
+                                            <td class="text-center">@generalApply.FullName</td>
+                                            <td class="text-center">@generalApply.Email</td>
+                                            <td class="text-center">@generalApply.Position</td>
+                                            <td class="text-center">
+                                                <a href="@pdfPath" target="_blank">
+                                                    <img src="~/img/pdf.svg" alt="PDF" class="pdf-svg" />
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                @foreach (var generalApplyFile in generalApply.GeneralApplyFiles)
+                                                {
+                                                    var filePath = "/uploads/" + generalApplyFile.FileName;
+                                                <a class="d-inline-block mx-2" href="@filePath" target="_blank">
+                                                    <img src="~/img/pdf.svg" alt="PDF" class="pdf-svg" />
+                                                </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        <br />*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-job-opportunity", function () {
+
+            var deleteBtn = $(this);
+            var jobOpportunity = $(this).parents().eq(2);
+
+            var data = {
+                id: $(jobOpportunity).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/career/delete_job_opportunity",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(jobOpportunity).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+
+        $(document).on("click", ".delete-internship-opportunity", function () {
+
+            var deleteBtn = $(this);
+            var internshipOpportunity = $(this).parents().eq(2);
+
+            var data = {
+                id: $(internshipOpportunity).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/career/delete_internship_opportunity",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(internshipOpportunity).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

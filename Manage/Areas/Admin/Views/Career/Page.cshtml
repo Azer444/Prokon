@@ -1,0 +1,335 @@
+﻿@model CareerPageViewModel
+
+@{
+    ViewData["Title"] = "Career Page";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Career Page</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Main Photo</h2>
+                        @if (Model.PageMainPhoto == null)
+                        {
+                            <a href="/admin/career/define_main_photo" class="btn btn-primary mb-3">Define Main Photo</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Photo</th>
+                                            <th class="main-color text-center">Title(AZ)</th>
+                                            <th class="main-color text-center">Title(RU)</th>
+                                            <th class="main-color text-center">Title(EN)</th>
+                                            <th class="main-color text-center">Title(TR)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var photoPath = "/uploads/" + Model.PageMainPhoto.PhotoName;
+                                            <tr id="@Model.PageMainPhoto.Id">
+                                                <td class="text-center">
+                                                    <img src="@photoPath" class="table-image-item" />
+                                                </td>
+                                                <td class="text-center">@Model.PageMainPhoto.Title_AZ</td>
+                                                <td class="text-center">@Model.PageMainPhoto.Title_RU</td>
+                                                <td class="text-center">@Model.PageMainPhoto.Title_EN</td>
+                                                <td class="text-center">@Model.PageMainPhoto.Title_TR</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-primary" href="/admin/career/edit_main_photo/@Model.PageMainPhoto.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                        <h2 class="main-color">Job Opportunities</h2>
+                        <h4 class="main-color">Components</h4>
+                        <a href="/admin/career/add_job_component" class="btn btn-primary mb-3">Add Component</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Photo</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var jobComponent in Model.JobComponents)
+                                    {
+                                        var photoPath = "/uploads/" + jobComponent.PhotoName;
+                                        <tr id="@jobComponent.Id">
+                                            <td class="text-center">
+                                                <img src="@photoPath" class="table-image-item" />
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary" href="/admin/career/edit_job_component/@jobComponent.Id">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/career/details_job_component/@jobComponent.Id">Details</a>
+                                                    <a class="btn btn-danger delete-job-component text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <br />
+
+                        <h2 class="main-color">Internship Opportunities</h2>
+                        <h4 class="main-color">Components</h4>
+                        <a href="/admin/career/add_internship_component" class="btn btn-primary mb-3">Add Component</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Photo</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var internshipComponent in Model.InternshipComponents)
+                                    {
+                                        var photoPath = "/uploads/" + internshipComponent.PhotoName;
+                                        <tr id="@internshipComponent.Id">
+                                            <td class="text-center">
+                                                <img src="@photoPath" class="table-image-item" />
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary" href="/admin/career/edit_internship_component/@internshipComponent.Id">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/career/details_internship_component/@internshipComponent.Id">Details</a>
+                                                    <a class="btn btn-danger delete-internship-component text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @*<br />
+
+                        <h2 class="main-color">General Application</h2>
+                        <h4 class="main-color">Content</h4>
+                        @if (Model.CareerAppContent == null)
+                        {
+                            <a href="/admin/career/define_app_content" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Content (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="@Model.CareerAppContent.Id">
+                                            <td class="text-center">@Html.Raw(Model.CareerAppContent.Content_EN)</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary" href="/admin/career/edit_app_content">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/career/details_app_content">Details</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />*@
+
+                        <h2 class="main-color">Form Component</h2>
+                        @if (Model.CareerFormComponent == null)
+                        {
+                            <a href="/admin/career/define_form_component/" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Title (AZ)</th>
+                                            <th class="main-color text-center">Title (RU)</th>
+                                            <th class="main-color text-center">Title (EN)</th>
+                                            <th class="main-color text-center">Title (TR)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr id="@Model.CareerFormComponent.Id">
+                                                <td class="text-center">@Model.CareerFormComponent.Title_AZ</td>
+                                                <td class="text-center">@Model.CareerFormComponent.Title_RU</td>
+                                                <td class="text-center">@Model.CareerFormComponent.Title_EN</td>
+                                                <td class="text-center">@Model.CareerFormComponent.Title_TR</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-info mx-2" href="/admin/career/details_form_component">Details</a>
+                                                        <a class="btn btn-primary" href="/admin/career/edit_form_component">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                        <h2 class="main-color">Page Access Component</h2>
+                        @if (Model.PageAccessComponent == null)
+                        {
+                            <a href="/admin/career/define_page_access_component" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Access1 (EN)</th>
+                                            <th class="main-color text-center">Access2 (EN)</th>
+                                            <th class="main-color text-center">Access3 (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr id="@Model.PageAccessComponent.Id">
+                                                <td class="text-center">@Model.PageAccessComponent.Access1_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access2_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access3_EN</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-info mx-2" href="/admin/career/details_page_access_component/@Model.PageAccessComponent.Id">Details</a>
+                                                        <a class="btn btn-primary" href="/admin/career/edit_page_access_component/@Model.PageAccessComponent.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                        <h2 class="main-color">Content Access Component</h2>
+                        @if (Model.ContentAccessComponent == null)
+                        {
+                            <a href="/admin/career/define_content_access_component/" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Access1 (EN)</th>
+                                            <th class="main-color text-center">Access2 (EN)</th>
+                                            <th class="main-color text-center">Access3 (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr id="@Model.ContentAccessComponent.Id">
+                                                <td class="text-center">@Model.ContentAccessComponent.Access1_EN</td>
+                                                <td class="text-center">@Model.ContentAccessComponent.Access2_EN</td>
+                                                <td class="text-center">@Model.ContentAccessComponent.Access3_EN</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-info mx-2" href="/admin/career/details_content_access_component/@Model.ContentAccessComponent.Id">Details</a>
+                                                        <a class="btn btn-primary" href="/admin/career/edit_content_access_component/@Model.ContentAccessComponent.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-job-component", function () {
+
+            var deleteBtn = $(this);
+            var jobComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(jobComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/career/delete_job_component",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(jobComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+
+        $(document).on("click", ".delete-internship-component", function () {
+
+            var deleteBtn = $(this);
+            var internshipComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(internshipComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/career/delete_internship_component",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(internshipComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

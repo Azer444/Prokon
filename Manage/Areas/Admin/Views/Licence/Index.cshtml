@@ -1,0 +1,104 @@
+﻿@model List<Licence>
+
+@{
+    ViewData["Title"] = "Licences";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Licences</h6>
+                    </div>
+                    <div class="card-body">
+                        <a href="/admin/licence/add" class="btn btn-primary mb-3">Add</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Title Photo</th>
+                                        <th class="main-color text-center">Name(AZ)</th>
+                                        <th class="main-color text-center">Name(RU)</th>
+                                        <th class="main-color text-center">Name(EN)</th>
+                                        <th class="main-color text-center">Name(TR)</th>
+                                        <th class="main-color text-center">PDF</th>
+                                        <th class="main-color text-center">Country</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var licence in Model)
+                                    {
+                                        var photoPath = "/uploads/" + licence.PhotoName;
+                                        var pdfPath = "/uploads/" + licence.PDFName;
+                                        <tr id="@licence.Id">
+                                            <td class="text-center">
+                                                <img src="@photoPath" class="pdf-png border" />
+                                            </td>
+                                            <td class="text-center">@licence.Name_AZ</td>
+                                            <td class="text-center">@licence.Name_RU</td>
+                                            <td class="text-center">@licence.Name_EN</td>
+                                            <td class="text-center">@licence.Name_TR</td>
+                                            <td class="text-center">
+                                                <a href="@pdfPath" target="_blank">
+                                                    <img src="~/img/pdf.svg" alt="PDF" class="pdf-svg" />
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                @licence.Country.Name_EN
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="/admin/licence/edit/@licence.Id" class="btn btn-primary mr-2">Edit</a>
+                                                    <a class="btn btn-danger delete-btn text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-btn", function () {
+
+            var deleteBtn = $(this);
+            var licence = $(this).parents().eq(2);
+
+            var data = {
+                id: $(licence).attr('id')
+            }
+
+            $.ajax({
+                url: "@Url.Action("/admin/licence/delete")",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).removeClass("white-color").addClass("alert-success-text white-background confirmed");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(licence).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

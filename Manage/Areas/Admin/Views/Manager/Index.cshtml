@@ -1,0 +1,79 @@
+﻿@model List<IdentityUser>
+
+@{
+    ViewData["Title"] = "Admins";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Admins</h6>
+                    </div>
+                    <div class="card-body">
+                        <a asp-action="add_admin" asp-controller="manager" class="btn btn-primary mb-3">Add Admin</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Username</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var admin in Model)
+                                    {
+                                        <tr id="@admin.Id">
+                                            <td class="text-center">@admin.UserName</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a asp-action="edit_admin" asp-controller="manager" asp-route-id="@admin.Id" class="btn btn-primary mr-2">Edit</a>
+                                                    <a class="btn btn-danger delete-btn text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-btn", function () {
+
+            var deleteBtn = $(this);
+            var admin = $(this).parents().eq(2);
+
+            var data = {
+                id: $(admin).attr('id')
+            }
+
+            $.ajax({
+                url: "@Url.Action("delete_admin","manager")",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).removeClass("white-color").addClass("alert-success-text white-background confirmed");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(admin).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

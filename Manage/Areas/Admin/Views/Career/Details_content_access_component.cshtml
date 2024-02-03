@@ -1,0 +1,168 @@
+﻿@model ContentAccessComponent
+
+@{
+    ViewData["Title"] = "Details Content Access Component";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3 d-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-white">Details Content Access Component</h6>
+                        <div>
+                            <a asp-action="page" asp-controller="career" class="btn btn-primary">Back to List</a>
+                            <a asp-action="edit_content_access_component" asp-controller="career" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row main-color">
+                                <div class="col-12">
+                                    <h4 class="main-color">Access 1</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access1_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access1_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access1_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access1_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access1_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access1_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access1_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access1_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <h4 class="main-color">Access 2</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access2_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access2_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access2_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access2_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access2_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access2_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access2_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access2_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <h4 class="main-color">Access 3</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access3_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access3_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access3_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access3_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access3_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access3_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Access3_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Access3_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

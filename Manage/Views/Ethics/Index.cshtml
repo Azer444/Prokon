@@ -1,0 +1,321 @@
+﻿@model EthicsViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Ethics";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "ethics";
+}
+
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/ethics" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/ethics" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/ethics" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/ethics" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/ethics" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/ethics" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/ethics" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/ethics" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="row ethics-component">
+                @{
+                    var order = 1;
+
+                    foreach (var ethicsComponent in Model.EthicsComponents)
+                    {
+                        var splited_1_AZ = ethicsComponent.SplitedContent_AZ?.FirstOrDefault();
+                        var splited_1_RU = ethicsComponent.SplitedContent_RU?.FirstOrDefault();
+                        var splited_1_EN = ethicsComponent.SplitedContent_EN?.FirstOrDefault();
+                        var splited_1_TR = ethicsComponent.SplitedContent_TR?.FirstOrDefault();
+                        var spliteds_AZ = ethicsComponent.SplitedContent_AZ?.Skip(1).ToList();
+                        var spliteds_RU = ethicsComponent.SplitedContent_RU?.Skip(1).ToList();
+                        var spliteds_EN = ethicsComponent.SplitedContent_EN?.Skip(1).ToList();
+                        var spliteds_TR = ethicsComponent.SplitedContent_TR?.Skip(1).ToList();
+
+                        if (order % 2 == 1)
+                        {
+                            <div class="col-12 col-md-5 d-flex align-items-center">
+                                <div class="ethics-component-text main-color">
+                                    @if (lang == "az")
+                                    {
+                                        @Html.Raw(splited_1_AZ)
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Html.Raw(splited_1_RU)
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Html.Raw(splited_1_EN)
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Html.Raw(splited_1_TR)
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-7 mt-4 mt-md-0 d-flex align-items-center">
+                                @{
+                                    var photoPath = "/uploads/" + ethicsComponent.PhotoName;
+                                }
+                                <img class="w-100" src="@photoPath">
+                            </div>
+
+                            <div class="col-12">
+                                <div class="ethics-component-text main-color">
+                                    @if (lang == "az")
+                                    {
+                                        if (spliteds_AZ != null)
+                                        {
+                                            @foreach (var splited_AZ in spliteds_AZ)
+                                            {
+                                                @Html.Raw(splited_AZ)
+                                            }
+                                        }
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        if (spliteds_RU != null)
+                                        {
+                                            @foreach (var splited_RU in spliteds_RU)
+                                            {
+                                                @Html.Raw(splited_RU)
+                                            }
+                                        }
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        if (spliteds_EN != null)
+                                        {
+                                            @foreach (var splited_EN in spliteds_EN)
+                                            {
+                                                @Html.Raw(splited_EN)
+                                            }
+                                        }
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        if (spliteds_TR != null)
+                                        {
+                                            @foreach (var splited_TR in spliteds_TR)
+                                            {
+                                                @Html.Raw(splited_TR)
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-12 col-md-7 mt-4 mt-md-0 d-flex align-items-center">
+                                @{
+                                    var photoPath = "/uploads/" + ethicsComponent.PhotoName;
+                                }
+                                <img class="w-100" src="@photoPath">
+                            </div>
+                            <div class="col-12 col-md-5 d-flex align-items-center">
+                                <div class="ethics-component-text main-color">
+                                    @if (lang == "az")
+                                    {
+                                        @Html.Raw(splited_1_AZ)
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Html.Raw(splited_1_RU)
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Html.Raw(splited_1_EN)
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Html.Raw(splited_1_TR)
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="ethics-component-text main-color">
+                                    @if (lang == "az")
+                                    {
+                                        if (spliteds_AZ != null)
+                                        {
+                                            @foreach (var splited_AZ in spliteds_AZ)
+                                            {
+                                                @Html.Raw(splited_AZ)
+                                            }
+                                        }
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        if (spliteds_RU != null)
+                                        {
+                                            @foreach (var splited_RU in spliteds_RU)
+                                            {
+                                                @Html.Raw(splited_RU)
+                                            }
+                                        }
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        if (spliteds_EN != null)
+                                        {
+                                            @foreach (var splited_EN in spliteds_EN)
+                                            {
+                                                @Html.Raw(splited_EN)
+                                            }
+                                        }
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        if (spliteds_TR != null)
+                                        {
+                                            @foreach (var splited_TR in spliteds_TR)
+                                            {
+                                                @Html.Raw(splited_TR)
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                        order++;
+                    }
+                }
+            </div>
+            @if (Model.EthicsFileComponents.Count > 0)
+            {
+                <div class="row ethics-sub-component">
+                    @foreach (var ethicsFileComponent in Model.EthicsFileComponents)
+                    {
+                        var filePath = "/uploads/" + ethicsFileComponent.FileName;
+                        <a href="@filePath" target="_blank" class="col-12 col-md-4 mt-4 mt-md-0 d-flex justify-content-center">
+                            <div class="row">
+                                <div class="col-12 mb-3 text-center">
+                                    <img src="~/img/Group 79.svg" />
+                                </div>
+                                <div class="col-12 text-center">
+                                    <p class="w-50 d-inline-block text-center main-color">
+                                        @if (lang == "az")
+                                        {
+                                            @ethicsFileComponent.Title_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @ethicsFileComponent.Title_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @ethicsFileComponent.Title_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @ethicsFileComponent.Title_TR
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)

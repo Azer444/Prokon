@@ -1,0 +1,91 @@
+﻿@model List<NavTitleComponent>
+
+@{
+    ViewData["Title"] = "Nav Title Components";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Navbar</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Title Component</h2>
+                        <a asp-action="add_title_component" asp-controller="nav" class="btn btn-primary mb-3">Add</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Title (AZ)</th>
+                                        <th class="main-color text-center">Title (RU)</th>
+                                        <th class="main-color text-center">Title (EN)</th>
+                                        <th class="main-color text-center">Title (TR)</th>
+                                        <th class="main-color text-center">Link</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var navTitleComponent in Model)
+                                    {
+                                    <tr id="@navTitleComponent.Id">
+                                        <td class="text-center">@navTitleComponent.Title_AZ</td>
+                                        <td class="text-center">@navTitleComponent.Title_RU</td>
+                                        <td class="text-center">@navTitleComponent.Title_EN</td>
+                                        <td class="text-center">@navTitleComponent.Title_TR</td>
+                                        <td class="text-center">@navTitleComponent.Link</td>
+                                        <td class="text-center">
+                                            <div class="d-flex justify-content-center">
+                                                <a asp-action="add_component" asp-controller="nav" asp-route-id="@navTitleComponent.Id" class="btn btn-primary">Add Component</a>
+                                                <a asp-action="edit_title_component" asp-controller="nav" asp-route-id="@navTitleComponent.Id" class="btn btn-primary ml-2">Edit</a>
+                                                <a asp-action="detail_title_component" asp-controller="nav" asp-route-id="@navTitleComponent.Id" class="btn btn-info mx-2">Details</a>
+                                                <a class="btn btn-danger delete-btn text-white">Delete</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-btn", function () {
+
+            var deleteBtn = $(this);
+            var navTitleComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(navTitleComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "@Url.Action("delete_title_component","nav")",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(navTitleComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}
+
+

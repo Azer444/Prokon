@@ -1,0 +1,79 @@
+﻿@model List<Partner>
+
+@{
+    ViewData["Title"] = "Partners";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Partners</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Partners</h2>
+                        <a href="/admin/partner/add" class="btn btn-primary mb-3">Add Partner</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Logo</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var partner in Model)
+                                    {
+                                        var partnerPath = "/uploads/" + partner.LogoName;
+                                        <tr id="@partner.Id">
+                                            <td class="text-center">
+                                                <img src="@partnerPath" class="table-image-item" />
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn btn-danger delete-partner text-white">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-partner", function () {
+
+            var deleteBtn = $(this);
+            var partner = $(this).parents().eq(1);
+
+            var data = {
+                id: $(partner).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/partner/delete",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(partner).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

@@ -1,0 +1,379 @@
+﻿@model EthicsHotlineViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Ethics Hotline";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "ethicshotline";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/ethicshotline" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/ethicshotline" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/ethicshotline" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/ethicshotline" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/ethicshotline" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/ethicshotline" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/ethicshotline" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/ethicshotline" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="row ethics-hotline-contents justify-content-between">
+                @if (Model.EthicsHotlineFormComponent != null)
+                {
+                    <div class="col-12 mb-4 order-12 order-md-1 mt-5 mt-md-0">
+                        <h1 class="ethics-hotline-form-title main-color-2">
+                            @if (lang == "az")
+                            {
+                                @Model.EthicsHotlineFormComponent.Title_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @Model.EthicsHotlineFormComponent.Title_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @Model.EthicsHotlineFormComponent.Title_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @Model.EthicsHotlineFormComponent.Title_TR
+                            }
+                        </h1>
+                    </div>
+                    <div class="col-12 col-md-6 order-12 order-md-1">
+                        <form id="contact-form" class="ethics-hotline-form row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    @{
+                                        string placeholder1 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder1 = Model.EthicsHotlineFormComponent.Field1_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder1 = Model.EthicsHotlineFormComponent.Field1_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder1 = Model.EthicsHotlineFormComponent.Field1_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder1 = Model.EthicsHotlineFormComponent.Field1_TR;
+                                        }
+                                        <input id="name" name="name" class="ethics-hotline-input" placeholder="@placeholder1">
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    @{
+                                        string placeholder2 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder2 = Model.EthicsHotlineFormComponent.Field2_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder2 = Model.EthicsHotlineFormComponent.Field2_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder2 = Model.EthicsHotlineFormComponent.Field2_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder2 = Model.EthicsHotlineFormComponent.Field2_TR;
+                                        }
+                                        <input id="email" name="email" class="ethics-hotline-input" placeholder="@placeholder2">
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @{
+                                        string placeholder3 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder3 = Model.EthicsHotlineFormComponent.Field3_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder3 = Model.EthicsHotlineFormComponent.Field3_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder3 = Model.EthicsHotlineFormComponent.Field3_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder3 = Model.EthicsHotlineFormComponent.Field3_TR;
+                                        }
+                                        <input id="subject" name="subject" class="ethics-hotline-input" placeholder="@placeholder3">
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @{
+                                        string placeholder4 = string.Empty;
+
+                                        if (lang == "az")
+                                        {
+                                            placeholder4 = Model.EthicsHotlineFormComponent.Field4_AZ;
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            placeholder4 = Model.EthicsHotlineFormComponent.Field4_RU;
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            placeholder4 = Model.EthicsHotlineFormComponent.Field4_EN;
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            placeholder4 = Model.EthicsHotlineFormComponent.Field4_TR;
+                                        }
+                                        <textarea id="message" name="message" class="ethics-hotline-input" placeholder="@placeholder4"></textarea>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12 form-success-alert d-none">
+                                <p class="alert alert-success">
+                                    @if (lang == "az")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.SuccessMessage_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.SuccessMessage_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.SuccessMessage_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.SuccessMessage_TR
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-12 form-error-alert d-none">
+                                <p class="alert alert-danger">
+                                    @if (lang == "az")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.ErrorMessage_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.ErrorMessage_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.ErrorMessage_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Model.EthicsHotlineFormComponent.ErrorMessage_TR
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                @{
+                                    string buttonText = string.Empty;
+
+                                    if (lang == "az")
+                                    {
+                                        buttonText = Model.EthicsHotlineFormComponent.ButtonText_AZ;
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        buttonText = Model.EthicsHotlineFormComponent.ButtonText_RU;
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        buttonText = Model.EthicsHotlineFormComponent.ButtonText_EN;
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        buttonText = Model.EthicsHotlineFormComponent.ButtonText_TR;
+                                    }
+                                    <button id="submit" class="text-white ethics-hotline-form-submit d-flex align-items-center justify-content-center">
+                                        @buttonText
+                                    </button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                }
+                <div class="col-12 col-md-5 main-color order-1 order-md-12">
+                    @if (lang == "az")
+                    {
+                        @Html.Raw(Model.FooterPartialViewModel?.SiteConfig?.HeadOffice_AZ)
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Html.Raw(Model.FooterPartialViewModel?.SiteConfig?.HeadOffice_RU)
+                    }
+                    else if (lang == "en")
+                    {
+                        @Html.Raw(Model.FooterPartialViewModel?.SiteConfig?.HeadOffice_EN)
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Html.Raw(Model.FooterPartialViewModel?.SiteConfig?.HeadOffice_TR)
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/ethics-hotline.js"></script>
+    <script>
+        $('form#contact-form').submit(function (e) {
+
+            e.preventDefault();
+
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var subject = $('#subject').val();
+            var message = $('#message').val();
+
+            if (name == "" || email == "" || subject == "" || message == "") {
+                $('.form-error-alert').removeClass('d-none');
+            }
+            else {
+
+            var data = new FormData(this);
+
+            $.ajax({
+                url: "@Url.Action("add_contact_message","ethicshotline")",
+                data: data,
+                method: 'post',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function () {
+                    $('.form-error-alert').addClass('d-none');
+                    $('.form-success-alert').removeClass('d-none');
+
+                    setTimeout(function () {
+                        $('.form-success-alert').addClass("d-none");
+                    }, 3000)
+
+                    $('#name').val('');
+                    $('#email').val('');
+                    $('#subject').val('');
+                    $('#message').val('');
+                },
+                error: function () {
+                    $('.form-alert').removeClass('d-none');
+                }
+            })
+            }
+        })
+    </script>
+}

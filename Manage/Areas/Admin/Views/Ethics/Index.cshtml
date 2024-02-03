@@ -1,0 +1,230 @@
+﻿@model EthicsIndexViewModel
+
+@{
+    ViewData["Title"] = "Ethics Page";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Ethics Page</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Main Photo</h2>
+                        @if (Model.MainPhoto == null)
+                        {
+                            <a href="/admin/ethics/define_main_photo" class="btn btn-primary mb-3">Define Main Photo</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Photo</th>
+                                            <th class="main-color text-center">Title(AZ)</th>
+                                            <th class="main-color text-center">Title(RU)</th>
+                                            <th class="main-color text-center">Title(EN)</th>
+                                            <th class="main-color text-center">Title(TR)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var photoPath = "/uploads/" + Model.MainPhoto.PhotoName;
+                                            <tr id="@Model.MainPhoto.Id">
+                                                <td class="text-center">
+                                                    <img src="@photoPath" class="table-image-item" />
+                                                </td>
+                                                <td class="text-center">@Model.MainPhoto.Title_AZ</td>
+                                                <td class="text-center">@Model.MainPhoto.Title_RU</td>
+                                                <td class="text-center">@Model.MainPhoto.Title_EN</td>
+                                                <td class="text-center">@Model.MainPhoto.Title_TR</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href="/admin/ethics/edit_main_photo/@Model.MainPhoto.Id" class="btn btn-primary">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                        <h2 class="main-color">Components</h2>
+                        <a href="/admin/ethics/add_component" class="btn btn-primary mb-3">Add Component</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Photo</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ethicsComponent in Model.Components)
+                                    {
+                                        var photoPath = "/uploads/" + ethicsComponent.PhotoName;
+                                        <tr id="@ethicsComponent.Id">
+                                            <td class="text-center">
+                                                <img src="@photoPath" class="table-image-item" />
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary" href="/admin/ethics/edit_component/@ethicsComponent.Id">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/ethics/details_component/@ethicsComponent.Id">Details</a>
+                                                    <a class="btn btn-danger delete-component text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <br />
+
+                        <h2 class="main-color">File Components</h2>
+                        <a href="/admin/ethics/add_file_component" class="btn btn-primary mb-3">Add Component</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">File</th>
+                                        <th class="main-color text-center">Title(AZ)</th>
+                                        <th class="main-color text-center">Title(RU)</th>
+                                        <th class="main-color text-center">Title(EN)</th>
+                                        <th class="main-color text-center">Title(TR)</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ethicsFileComponent in Model.FileComponents)
+                                    {
+                                        var filePath = "/uploads/" + ethicsFileComponent.FileName;
+                                        <tr id="@ethicsFileComponent.Id">
+                                            <td class="text-center">
+                                                <a href="@filePath" target="_blank">
+                                                    <img src="~/img/pdf.svg" alt="PDF" class="pdf-svg" />
+                                                </a>
+                                            </td>
+                                            <td class="text-center">@ethicsFileComponent.Title_AZ</td>
+                                            <td class="text-center">@ethicsFileComponent.Title_RU</td>
+                                            <td class="text-center">@ethicsFileComponent.Title_EN</td>
+                                            <td class="text-center">@ethicsFileComponent.Title_TR</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary mr-2" href="/admin/ethics/edit_file_component/@ethicsFileComponent.Id">Edit</a>
+                                                    <a class="btn btn-danger delete-file-component text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <br />
+                        <h2 class="main-color">Page Access Component</h2>
+                        @if (Model.PageAccessComponent == null)
+                        {
+                            <a href="/admin/ethics/define_page_access_component/" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Access1 (EN)</th>
+                                            <th class="main-color text-center">Access2 (EN)</th>
+                                            <th class="main-color text-center">Access3 (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr id="@Model.PageAccessComponent.Id">
+                                                <td class="text-center">@Model.PageAccessComponent.Access1_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access2_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access3_EN</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-info mx-2" href="/admin/ethics/details_page_access_component/@Model.PageAccessComponent.Id">Details</a>
+                                                        <a class="btn btn-primary" href="/admin/ethics/edit_page_access_component/@Model.PageAccessComponent.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-component", function () {
+
+            var deleteBtn = $(this);
+            var ethicsComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(ethicsComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/ethics/delete_component",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(ethicsComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+
+        $(document).on("click", ".delete-file-component", function () {
+
+            var deleteBtn = $(this);
+            var ethicsFileComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(ethicsFileComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/ethics/delete_file_component",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(ethicsFileComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

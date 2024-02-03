@@ -1,0 +1,234 @@
+﻿@model SafetyViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Safety";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "safety";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/safety" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/safety" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/safety" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/safety" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/safety" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/safety" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/safety" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/safety" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            @{
+                var order = 1;
+
+                foreach (var safetyComponent in Model.SafetyComponents)
+                {
+                    if (order % 2 == 1)
+                    {
+                        <div class="row safety-component">
+                            <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex align-items-center order-12 order-md-1">
+                                <div class="safety-component-text">
+                                    @if (lang == "az")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_AZ)
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_RU)
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_EN)
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_TR)
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center order-1 order-md-12">
+                                @{
+                                    var photoPath = "/uploads/" + safetyComponent.PhotoName;
+                                }
+                                <a target="_blank" href="@photoPath">
+                                    <img class="w-100" src="@photoPath" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row safety-component">
+                            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                                @{
+                                    var photoPath = "/uploads/" + safetyComponent.PhotoName;
+                                }
+                                <a target="_blank" href="@photoPath">
+                                    <img class="w-100" src="@photoPath" alt="">
+                                </a>
+                            </div>
+                            <div class="col-12 col-md-6 mt-3 mt-md-0 d-flex align-items-center">
+                                <div class="safety-component-text">
+                                    @if (lang == "az")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_AZ)
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_RU)
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_EN)
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Html.Raw(safetyComponent.Content_TR)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    order++;
+                }
+            }
+        </div>
+        <div class="safety-text-component">
+            <div class="container">
+                <div class="safety-text-component-title text-center">
+                    @if (lang == "az")
+                    {
+                        @Model.SafetyTextComponent?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.SafetyTextComponent?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.SafetyTextComponent?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.SafetyTextComponent?.Title_TR
+                    }
+                </div>
+                <div class="safety-text-component-content d-flex justify-content-center mt-5">
+                    <div class="w-75">
+                        @if (lang == "az")
+                        {
+                            @Html.Raw(Model.SafetyTextComponent?.Content_AZ)
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Html.Raw(Model.SafetyTextComponent?.Content_RU)
+                        }
+                        else if (lang == "en")
+                        {
+                            @Html.Raw(Model.SafetyTextComponent?.Content_EN)
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Html.Raw(Model.SafetyTextComponent?.Content_TR)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)  

@@ -1,0 +1,177 @@
+﻿@model SectionLayoutContent
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3 d-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-white">Section Layout Content Details</h6>
+                        <div>
+                            <a asp-action="index" asp-controller="home" class="btn btn-primary">Back to List</a>
+                            <a asp-action="edit_section_layout_content" asp-controller="home" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row main-color">
+                                <div class="col-12">
+                                    <h4 class="main-color">Section Name</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.SectionName)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.SectionName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <h4 class="main-color">Title Text</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TitleText_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.TitleText_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TitleText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.TitleText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TitleText_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.TitleText_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TitleText_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.TitleText_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <h4 class="main-color">Helper Text</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HelperText_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.HelperText_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HelperText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.HelperText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HelperText_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.HelperText_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HelperText_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.HelperText_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <h4 class="main-color">Bottom Text</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.BottomText_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.BottomText_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.BottomText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.BottomText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.BottomText_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.BottomText_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.BottomText_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.BottomText_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

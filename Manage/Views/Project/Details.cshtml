@@ -1,0 +1,354 @@
+﻿@model ProjectDetailsViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Project";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.Project.TitlePhotoName;
+    ViewData["Description"] = Model.Project.Name_EN;
+    ViewData["Link"] = $"project/details/{Model.Project.Slug}";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/project" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/project" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/project/details/@Model.Project.Slug" class="black-color pr-2">
+                        @Model.Project?.Name_AZ
+                    </a>
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/project" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/project" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/project/details/@Model.Project.Slug" class="black-color pr-2">
+                        @Model.Project?.Name_RU
+                    </a>
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/project" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/project" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/project/details/@Model.Project.Slug" class="black-color pr-2">
+                        @Model.Project?.Name_EN
+                    </a>
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/project" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/project" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/project/details/@Model.Project.Slug" class="black-color pr-2">
+                        @Model.Project?.Name_TR
+                    </a>
+                }
+            </div>
+            @{
+                var description_az_1 = Model.Project?.SplitedDescription_AZ.FirstOrDefault();
+                var description_ru_1 = Model.Project?.SplitedDescription_RU.FirstOrDefault();
+                var description_en_1 = Model.Project?.SplitedDescription_EN.FirstOrDefault();
+                var description_tr_1 = Model.Project?.SplitedDescription_TR.FirstOrDefault();
+                var description_az_others = Model.Project?.SplitedDescription_AZ.Skip(1).ToList();
+                var description_ru_others = Model.Project?.SplitedDescription_RU.Skip(1).ToList();
+                var description_en_others = Model.Project?.SplitedDescription_EN.Skip(1).ToList();
+                var description_tr_others = Model.Project?.SplitedDescription_TR.Skip(1).ToList();
+            }
+            <div class="project row justify-content-between">
+                <div class="col-12 col-lg-5 order-11 order-lg-1 mt-3 mt-lg-0">
+                    <h2 class="project-title d-none d-lg-block main-color">
+                        @if (lang == "az")
+                        {
+                            @Model.Project?.Name_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.Project?.Name_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.Project?.Name_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.Project?.Name_TR
+                        }
+                    </h2>
+                    <div class="project-details">
+                        @if (lang == "az")
+                        {
+                            @Html.Raw(description_az_1)
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Html.Raw(description_ru_1)
+                        }
+                        else if (lang == "en")
+                        {
+                            @Html.Raw(description_en_1)
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Html.Raw(description_tr_1)
+                        }
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7 order-1 order-lg-12">
+                    <h2 class="project-mobile-title main-color d-block d-lg-none">
+                        @if (lang == "az")
+                        {
+                            @Model.Project?.Name_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.Project?.Name_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.Project?.Name_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.Project?.Name_TR
+                        }
+                    </h2>
+                    <div class="project-mobile-slider d-block d-lg-none">
+                        <div class="owl-carousel owl-theme position-relative">
+                            @{
+                                mainPhotoPath = "/uploads/" + Model.Project.TitlePhotoName;
+                            }
+                            <div class="project-mobile-slider-item">
+                                <img src="@mainPhotoPath">
+                            </div>
+
+                            @foreach (var projectPhoto in Model.Project.ProjectPhotos)
+                            {
+
+                                var photoPath_ = "/uploads/" + projectPhoto.PhotoName;
+
+                                <div class="project-mobile-slider-item">
+                                    <img src="@photoPath_">
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="project-photos d-none d-lg-block">
+                        <img class="project-detail-main-photo w-100"
+                             src="@mainPhotoPath">
+
+                        <div class="row project-thumbnails mt-3">
+                            @{
+                                var count = 1;
+                                foreach (var projectPhoto in Model.Project.ProjectPhotos)
+                                {
+                                    var photoPath_ = "/uploads/" + projectPhoto.PhotoName;
+
+                                    if (count == 4)
+                                    {
+                                        <div class="col-3 my-3">
+                                            <div class="position-relative">
+                                                <img class="w-100 project-thumbnail"
+                                                     src="@photoPath_">
+                                                <div class="cover d-flex justify-content-center align-items-center">See all <img class="ml-2" src="~/img/Vector (10).svg" /></div>
+                                            </div>
+                                        </div>
+
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        <div class="col-3 my-3">
+                                            <img class="w-100 project-thumbnail"
+                                                 src="@photoPath_">
+                                        </div>
+                                    }
+                                    count++;
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 order-12 order-lg-12">
+                    <div class="project-details">
+                        @if (lang == "az")
+                        {
+                            @foreach (var description_az in description_az_others)
+                            {
+                                @Html.Raw(description_az)
+                            }
+                        }
+                        else if (lang == "ru")
+                        {
+                            @foreach (var description_ru in description_ru_others)
+                            {
+                                @Html.Raw(description_ru)
+                            }
+                        }
+                        @if (lang == "en")
+                        {
+                            @foreach (var description_en in description_en_others)
+                            {
+                                @Html.Raw(description_en)
+                            }
+                        }
+                        @if (lang == "tr")
+                        {
+                            @foreach (var description_tr in description_tr_others)
+                            {
+                                @Html.Raw(description_tr)
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="gallery-collection d-flex">
+        <div class="gallery-modal">
+            <div class="gallery-component-collection">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3">
+                            @if (lang == "az")
+                            {
+                                <p class="d-block d-md-none">@Model.Project?.Name_AZ</p>
+                            }
+                            else if (lang == "ru")
+                            {
+                                <p class="d-block d-md-none">@Model.Project?.Name_RU</p>
+                            }
+                            else if (lang == "en")
+                            {
+                                <p class="d-block d-md-none">@Model.Project?.Name_EN</p>
+                            }
+                            else if (lang == "tr")
+                            {
+                                <p class="d-block d-md-none">@Model.Project?.Name_TR</p>
+                            }
+                            <div class="thumbnails">
+                                <img class="thumbnail mb-3" src="@mainPhotoPath" />
+                                @foreach (var projectPhoto in Model.Project?.ProjectPhotos)
+                                {
+                                    var photoPath_ = "/uploads/" + projectPhoto.PhotoName;
+                                    <img class="thumbnail mb-3" src="@photoPath_" />
+                                }
+                            </div>
+                        </div>
+                        <div class="col-9 d-none d-md-block">
+                            @{
+                                var activePhotoPath = "/uploads/" + Model.Project?.TitlePhotoName;
+                            }
+                            <div class="gallery-active-photo">
+                                <img src="@activePhotoPath" />
+                            </div>
+                            @if (lang == "az")
+                            {
+                                <p>@Model.Project?.Name_AZ</p>
+                            }
+                            else if (lang == "ru")
+                            {
+                                <p>@Model.Project?.Name_RU</p>
+                            }
+                            else if (lang == "en")
+                            {
+                                <p>@Model.Project?.Name_EN</p>
+                            }
+                            else if (lang == "tr")
+                            {
+                                <p>@Model.Project?.Name_TR</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    <script src="~/js/project.js"></script>
+}

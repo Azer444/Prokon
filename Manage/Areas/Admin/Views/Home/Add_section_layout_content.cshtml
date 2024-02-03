@@ -1,0 +1,141 @@
+﻿@model SectionLayoutContent
+
+@{
+    ViewData["Title"] = "Add Section Layout Content";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <h1 class="main-color">Add Section Layout Content</h1>
+                <form asp-action="add_section_layout_content" asp-controller="home" asp-area="admin" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <h3 class="main-color">Section Name</h3>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="SectionName" class="control-label main-color"></label>
+                                    <input asp-for="SectionName" class="form-control">
+                                    <span asp-validation-for="SectionName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <h3 class="main-color">Title Text</h3>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="TitleText_AZ" class="control-label main-color"></label>
+                                    <input asp-for="TitleText_AZ" class="form-control">
+                                    <span asp-validation-for="TitleText_AZ" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="TitleText_RU" class="control-label main-color"></label>
+                                    <input asp-for="TitleText_RU" class="form-control">
+                                    <span asp-validation-for="TitleText_RU" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="TitleText_EN" class="control-label main-color"></label>
+                                    <input asp-for="TitleText_EN" class="form-control">
+                                    <span asp-validation-for="TitleText_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="TitleText_TR" class="control-label main-color"></label>
+                                    <input asp-for="TitleText_TR" class="form-control">
+                                    <span asp-validation-for="TitleText_TR" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <h3 class="main-color">Helper Text</h3>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="HelperText_AZ" class="control-label main-color"></label>
+                                    <input asp-for="HelperText_AZ" class="form-control">
+                                    <span asp-validation-for="HelperText_AZ" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="HelperText_RU" class="control-label main-color"></label>
+                                    <input asp-for="HelperText_RU" class="form-control">
+                                    <span asp-validation-for="HelperText_RU" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="HelperText_EN" class="control-label main-color"></label>
+                                    <input asp-for="HelperText_EN" class="form-control">
+                                    <span asp-validation-for="HelperText_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="HelperText_TR" class="control-label main-color"></label>
+                                    <input asp-for="HelperText_TR" class="form-control">
+                                    <span asp-validation-for="HelperText_TR" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <h3 class="main-color">Bottom Text</h3>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BottomText_AZ" class="control-label main-color"></label>
+                                    <input asp-for="BottomText_AZ" class="form-control">
+                                    <span asp-validation-for="BottomText_AZ" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BottomText_RU" class="control-label main-color"></label>
+                                    <input asp-for="BottomText_RU" class="form-control">
+                                    <span asp-validation-for="BottomText_RU" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BottomText_EN" class="control-label main-color"></label>
+                                    <input asp-for="BottomText_EN" class="form-control">
+                                    <span asp-validation-for="BottomText_EN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="BottomText_TR" class="control-label main-color"></label>
+                                    <input asp-for="BottomText_TR" class="form-control">
+                                    <span asp-validation-for="BottomText_TR" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <div class="form-group">
+                                    <input type="submit" value="Add" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <a asp-action="index" asp-controller="home" class="main-color">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <!-- validate js -->
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,297 @@
+﻿@model SiteConfig
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    @await Html.PartialAsync("_SidebarPartial")
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3 d-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-white">Configuration Details</h6>
+                        <div>
+                            <a asp-action="index" asp-controller="configuration" class="btn btn-primary">Back to List</a>
+                            <a asp-action="edit" asp-controller="configuration" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row main-color">
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Logo</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            Header Logo
+                                        </div>
+                                        <div class="col-6">
+                                            @{
+                                                var photoPath = "/uploads/" + Model.FirstLogoName;
+                                            }
+                                            <img src="@photoPath" class="table-image-item" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            Footer Logo
+                                        </div>
+                                        <div class="col-6">
+                                            @{
+                                                photoPath = "/uploads/" + Model.SecondLogoName;
+                                            }
+                                            <img src="@photoPath" class="table-image-item" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Head Office</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HeadOffice_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.HeadOffice_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HeadOffice_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.HeadOffice_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HeadOffice_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.HeadOffice_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.HeadOffice_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.HeadOffice_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Copyright</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.CopyrightText_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.CopyrightText_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.CopyrightText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.CopyrightText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.CopyrightText_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.CopyrightText_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.CopyrightText_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.CopyrightText_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Linkedin</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.LinkedinText)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.LinkedinText)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.LinkedinText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.LinkedinText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.LinkedinLink)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.LinkedinLink)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Facebook</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.FacebookText)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.FacebookText)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.FacebookText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.FacebookText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.FacebookLink)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.FacebookLink)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Twitter</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TwitterText)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.TwitterText)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TwitterText_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.TwitterText_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.TwitterLink)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.TwitterLink)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Contact</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Email)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Phone)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.Raw(Model.Phone)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <h4 class="main-color">Footer Partner Photos</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            Footer Partner Photos
+                                        </div>
+                                        <div class="col-6">
+                                            @foreach (var footerPartner in Model.FooterPartners)
+                                            {
+                                                var footerPartnerPath = "/uploads/" + footerPartner.PhotoName;
+
+                                                <img src="@footerPartnerPath" class="table-image-item my-2" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

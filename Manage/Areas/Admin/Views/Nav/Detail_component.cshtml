@@ -1,0 +1,139 @@
+﻿@model NavComponent
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3 d-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-white">Navbar Component Details</h6>
+                        <div>
+                            <a asp-action="index" asp-controller="nav" class="btn btn-primary">Back to List</a>
+                            <a asp-action="edit_component" asp-controller="nav" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="row main-color">
+                                <div class="col-12">
+                                    <h4 class="main-color">Title</h4>
+                                    <hr />
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Title_AZ)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Title_AZ)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Title_RU)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Title_RU)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Title_EN)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Title_EN)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="row">
+                                        <div class="col-6 font-weight-bold">
+                                            @Html.DisplayNameFor(model => model.Title_TR)
+                                        </div>
+                                        <div class="col-6">
+                                            @Html.DisplayFor(model => model.Title_TR)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <h4 class="main-color">Components</h4>
+                                    <hr />
+                                    <a asp-action="add_subcomponent" asp-controller="nav" asp-route-id="@Model.Id" class="btn btn-primary">Add Component</a>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="main-color text-center">Title(AZ)</th>
+                                                    <th class="main-color text-center">Title(RU)</th>
+                                                    <th class="main-color text-center">Title(EN)</th>
+                                                    <th class="main-color text-center">Title(TR)</th>
+                                                    <th class="main-color text-center">Link</th>
+                                                    <th class="main-color text-center">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var navSubComponent in Model.NavSubComponents)
+                                                {
+                                                    <tr id="@navSubComponent.Id">
+                                                        <td class="text-center">@navSubComponent.Title_AZ</td>
+                                                        <td class="text-center">@navSubComponent.Title_RU</td>
+                                                        <td class="text-center">@navSubComponent.Title_EN</td>
+                                                        <td class="text-center">@navSubComponent.Title_TR</td>
+                                                        <td class="text-center">@navSubComponent.Link</td>
+                                                        <td class="text-center">
+                                                            <div class="d-flex justify-content-center">
+                                                                <a asp-action="edit_subcomponent" asp-controller="nav" asp-route-id="@navSubComponent.Id" class="btn btn-primary mr-2">Edit</a>
+                                                                <a class="btn btn-danger delete-btn text-white">Delete</a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-btn", function () {
+
+            var deleteBtn = $(this);
+            var navSubComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(navSubComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "@Url.Action("delete_subcomponent","nav")",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(navSubComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

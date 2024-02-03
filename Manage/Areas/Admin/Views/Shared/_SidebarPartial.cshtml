@@ -1,0 +1,116 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService _authorizationService
+@inject UserManager<IdentityUser> _userManager
+
+@{
+    var user = await _userManager.GetUserAsync(User);
+}
+
+<!-- Sidebar -->
+<ul class="navbar-nav main-background sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center">
+        <div class="sidebar-brand-text mx-3">
+            <img src="~/img/Prokon logo 2.png" class="sidebar-logo" />
+        </div>
+    </a>
+
+    @if (!(await _authorizationService.AuthorizeAsync(User, "HRPolicy")).Succeeded)
+    {
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapsePages"
+               aria-expanded="true" aria-controls="collapsePages">
+                <span>Pages</span>
+            </a>
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    @*<a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "entry" ? "active" : "") " asp-action="index" asp-controller="entry">Entry</a>*@
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "home" ? "active" : "")" href="/admin/home">Home</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "about" ? "active" : "")" href="/admin/about">About</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "vmv" ? "active" : "")" href="/admin/vmv">VMV</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "governance" ? "active" : "")" href="/admin/governance">Governance</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "page" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_page_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_content_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_content_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_content_access_component") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "project") ? "active" : "")" href="/admin/project/page">Project</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "services" ? "active" : "")" href="/admin/services">Services</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "safety" ? "active" : "")" href="/admin/safety">Safety</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "page" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_page_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_page_access_component" ) && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "partner") ? "active" : "")" href="/admin/partner/page">Partner</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "page" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_page_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_content_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_content_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_content_access_component") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "licence") ? "active" : "")" href="/admin/licence/page">Licence</a>
+                    @*<a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "team" ? "active" : "")" href="/admin/team">Our Team</a>*@
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "press" ? "active" : "")" href="/admin/press">Press Release</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "page" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_page_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_page_access_component") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "news" ) ? "active" : "")" href="/admin/news/page">News</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "page" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_page_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_page_access_component" ) && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "gallery" ) ? "active" : "")" href="/admin/gallery/page">Gallery</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "ethics"  ? "active" : "")" href="/admin/ethics">Ethics & Compliance</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "ethicshotline"  ? "active" : "")" href="/admin/ethicshotline">Ethics Hotline</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_main_photo" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "page" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add_job_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_job_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_job_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add_internship_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_internship_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_internship_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_app_content" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_app_content" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_app_content" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_form_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_form_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_form_component" ||  ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_page_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_page_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "define_content_access_component" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details_content_access_component"  || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit_content_access_component") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "career"  ? "active" : ""))" href="/admin/career/page">Career</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "contact"  ? "active" : "")" href="/admin/contact">Contact us</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "privacy"  ? "active" : "")" href="/admin/privacy">Privacy section</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "notice"  ? "active" : "")" href="/admin/notice">Legal Notice</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "sitemap"  ? "active" : "")" href="/admin/sitemap">Sitemap</a>
+                </div>
+            </div>
+        </li>
+    }
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+           aria-controls="collapseTwo">
+            <span>Components</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                @if (!(await _authorizationService.AuthorizeAsync(User, "HRPolicy")).Succeeded)
+                {
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "project" ) ? "active" : "")" href="/admin/project">Project</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "news" ) ? "active" : "")" href="/admin/news">News & Community</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "licence" ) ? "active" : "")" href="/admin/licence">Licences</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "details" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "edit" ) && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "gallery" ) ? "active" : "")" href="/admin/gallery">Gallery</a>
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "management" ? "active" : "")" href="/admin/management">Management</a>
+                    <a class="collapse-item @(((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" || ViewContext.RouteData.Values["Action"].ToString().ToLower() == "add") && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "partner" ) ? "active" : "")" href="/admin/partner/">Partner</a>
+                }
+                <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "career" ? "active" : "")" href="/admin/career">Career</a>
+                @if (!(await _authorizationService.AuthorizeAsync(User, "HRPolicy")).Succeeded)
+                {
+                    <a class="collapse-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "country" ? "active" : "")" href="/admin/country">Country</a>
+                }
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Dashboard -->
+    @if (!(await _authorizationService.AuthorizeAsync(User, "HRPolicy")).Succeeded)
+    {
+
+        <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "nav" ? "active" : "")">
+            <a class="nav-link" href="/admin/nav">
+                <span>Navbar</span>
+            </a>
+        </li>
+    }
+
+    @if (!(await _authorizationService.AuthorizeAsync(User, "HRPolicy")).Succeeded)
+    {
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item @((ViewContext.RouteData.Values["Action"].ToString().ToLower() == "index" && ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "configuration" ) ? "active" : "")">
+            <a class="nav-link" href="/admin/configuration">
+                <span>Site Configuration</span>
+            </a>
+        </li>
+    }
+
+
+    <!-- Nav Item - Dashboard -->
+    @if (!(await _authorizationService.AuthorizeAsync(User, "HRPolicy")).Succeeded)
+    {
+        <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "message" ? "active" : "")">
+            <a class="nav-link" href="/admin/message">
+                <span>Contact Messages</span>
+            </a>
+        </li>
+    }
+
+
+</ul>
+<!-- End of Sidebar -->

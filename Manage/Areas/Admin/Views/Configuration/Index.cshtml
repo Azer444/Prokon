@@ -1,0 +1,66 @@
+﻿@model SiteConfig
+
+@{
+    ViewData["Title"] = "Site Configuration";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Site Configuration</h6>
+                    </div>
+                    <div class="card-body">
+                        @if (Model == null)
+                        {
+                            <a asp-action="define" asp-controller="configuration" class="btn btn-primary mb-3">Define Configuration</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">First Logo</th>
+                                            <th class="main-color text-center">Second Logo</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var firstPhotoPath = "/uploads/" + Model.FirstLogoName;
+                                            var secondPhotoPath = "/uploads/" + Model.SecondLogoName;
+                                            <tr id="@Model.Id">
+                                                <td class="text-center">
+                                                    <img src="@firstPhotoPath" class="table-image-item" />
+                                                </td>
+                                                <td class="text-center">
+                                                    <img src="@secondPhotoPath" class="table-image-item" />
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-primary mr-2" asp-action="edit" asp-controller="configuration">Edit</a>
+                                                        <a class="btn btn-info" asp-action="details" asp-controller="configuration">Details</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,365 @@
+﻿@model NewsViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | News";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.MainNews.PhotoName;
+    ViewData["Description"] = Model.MainNews?.Title_EN;
+    ViewData["Link"] = $"news/details/{Model.MainNews.Slug}";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/news/details/@Model.MainNews?.Id" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/news/details/@Model.MainNews?.Id" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/news/details/@Model.MainNews?.Id" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/news/details/@Model.MainNews?.Id" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/news/details/@Model.MainNews?.Id" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/news/details/@Model.MainNews?.Id" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/news/details/@Model.MainNews?.Id" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/news/details/@Model.MainNews?.Id" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="main-news-component row">
+                <div class="col-12 col-lg-7">
+                    <h1 class="main-color main-news-component-title d-flex align-items-center">
+                        @if (lang == "az")
+                        {
+                            @Model.MainNews?.Title_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.MainNews.Title_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.MainNews?.Title_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.MainNews?.Title_TR
+                        }
+                    </h1>
+                </div>
+                <div class="col-12 mt-3 col-lg-5 d-flex align-items-center justify-content-end">
+                    <div class="main-color-2 main-news-component-ld w-100 d-flex justify-content-between d-lg-block">
+                        <p class="main-news-component-date mb-2 text-left text-lg-right d-inline-block d-lg-block">
+                            @Model.MainNews?.CreatedAt.ToString("dd.MM.yyyy")
+                        </p>
+                        <p class="main-news-component-location m-0 text-right d-inline-block d-lg-block">
+                            @if (lang == "az")
+                            {
+                                @Model.MainNews?.Location_AZ
+                            }
+                            else if (lang == "ru")
+                            {
+                                @Model.MainNews?.Location_RU
+                            }
+                            else if (lang == "en")
+                            {
+                                @Model.MainNews?.Location_EN
+                            }
+                            else if (lang == "tr")
+                            {
+                                @Model.MainNews?.Location_TR
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    @{
+                        var photoPath = "/uploads/" + Model.MainNews?.PhotoName;
+                    }
+                    <div class="main-news-component-img"
+                         style="background-image: url('@photoPath')">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="main-news-component-content">
+                        <div class="main-news-component-content-wrapper main-color">
+                            @if (lang == "az")
+                            {
+                                @Html.Raw(Model.MainNews?.Content_AZ)
+                            }
+                            else if (lang == "ru")
+                            {
+                                @Html.Raw(Model.MainNews?.Content_RU)
+                            }
+                            else if (lang == "en")
+                            {
+                                @Html.Raw(Model.MainNews?.Content_EN)
+                            }
+                            else if (lang == "tr")
+                            {
+                                @Html.Raw(Model.MainNews?.Content_TR)
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="news-components row">
+                <div class="col-12 col-md-6">
+                    @if (Model.PreviousNews != null)
+                    {
+                        var link = "/" + lang + "/news/details/" + Model.PreviousNews.Slug;
+                        var photoPath_ = "/uploads/" + Model.PreviousNews.PhotoName;
+                        <a href="@link" class="overlay-link"></a>
+                        <div class="news-component">
+                            <div class="news-component-top position-relative w-100"
+                                 style="background-image: url('@photoPath_');">
+                                <div class="news-component-top-cover position-absolute d-flex align-items-center justify-content-center">
+                                    <div class="news-component-top-cover-text text-white d-flex align-items-center">
+                                        <img src="/img/Vector (2).svg">
+                                        <span class="d-inline-block ml-2">Previous</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="news-component-bottom">
+                                <div class="news-component-bottom-content">
+                                    <p class="main-color news-component-bottom-content-title">
+                                        @if (lang == "az")
+                                        {
+                                            @Model.PreviousNews.Title_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Model.PreviousNews.Title_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Model.PreviousNews.Title_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Model.PreviousNews.Title_TR
+                                        }
+                                    </p>
+                                    <div class="main-color news-component-bottom-content-text">
+                                        @if (lang == "az")
+                                        {
+                                            @Html.Raw(Model.PreviousNews.Content_AZ)
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Html.Raw(Model.PreviousNews.Content_RU)
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Html.Raw(Model.PreviousNews.Content_EN)
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Html.Raw(Model.PreviousNews.Content_TR)
+                                        }
+                                    </div>
+                                    <div class="news-component-bottom__bottom d-flex justify-content-between mt-5">
+                                        <p class="main-color-2 news-location">
+                                            @if (lang == "az")
+                                            {
+                                                @Model.PreviousNews.Location_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.PreviousNews.Location_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.PreviousNews.Location_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.PreviousNews.Location_TR
+                                            }
+                                        </p>
+                                        <p class="main-color-2 news-date">
+                                            @Model.PreviousNews.CreatedAt.ToString("dd.MM.yyyy")
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-12 col-md-6 mt-4 mt-md-0">
+                    @if (Model.NextNews != null)
+                    {
+                        var link = "/" + lang + "/news/details/" + Model.NextNews.Slug;
+                        var photoPath_ = "/uploads/" + Model.NextNews.PhotoName;
+
+                        <div class="news-component position-relative">
+                            <a href="@link" class="news-component-anchor"></a>
+                            <div class="news-component-top w-100 position-relative"
+                                 style="background-image: url('@photoPath_');">
+                                <div class="news-component-top-cover position-absolute d-flex align-items-center justify-content-center">
+                                    <div class="news-component-top-cover-text text-white d-flex align-items-center">
+                                        <span class="d-inline-block mr-2">Next</span>
+                                        <img src="/img/Vector (1).svg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="news-component-bottom">
+                                <div class="news-component-bottom-content">
+                                    <p class="main-color news-component-bottom-content-title">
+                                        @if (lang == "az")
+                                        {
+                                            @Model.NextNews.Title_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Model.NextNews.Title_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Model.NextNews.Title_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Model.NextNews.Title_TR
+                                        }
+                                    </p>
+                                    <div class="main-color news-component-bottom-content-text">
+                                        @if (lang == "az")
+                                        {
+                                            @Html.Raw(Model.NextNews.Content_AZ)
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @Html.Raw(Model.NextNews.Content_RU)
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @Html.Raw(Model.NextNews.Content_EN)
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @Html.Raw(Model.NextNews.Content_TR)
+                                        }
+                                    </div>
+                                    <div class="news-component-bottom__bottom d-flex justify-content-between mt-5">
+                                        <p class="main-color-2">
+                                            @if (lang == "az")
+                                            {
+                                                @Model.NextNews.Location_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @Model.NextNews.Location_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @Model.NextNews.Location_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @Model.NextNews.Location_TR
+                                            }
+                                        </p>
+                                        <p class="main-color-2">
+                                            @Model.NextNews.CreatedAt.ToString("dd.MM.yyyy")
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    <script src="~/js/news.js"></script>
+}

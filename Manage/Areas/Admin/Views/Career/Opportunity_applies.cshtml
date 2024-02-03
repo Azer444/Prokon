@@ -1,0 +1,66 @@
+﻿@model Opportunity
+
+@{
+    ViewData["Title"] = "Opportunity Applies";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">@Model.Title_EN</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Applies</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Full Name</th>
+                                        <th class="main-color text-center">Email</th>
+                                        <th class="main-color text-center">CV</th>
+                                        <th class="main-color text-center">Supporting Files</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var opportunityApply in Model.OpportunityApplies)
+                                    {
+                                        var pdfPath = "/uploads/" + opportunityApply.CVName;
+
+                                        <tr id="@opportunityApply.Id">
+                                            <td class="text-center">@opportunityApply.FullName</td>
+                                            <td class="text-center">@opportunityApply.Email</td>
+                                            <td class="text-center">
+                                                <a href="@pdfPath" target="_blank">
+                                                    <img src="~/img/pdf.svg" alt="PDF" class="pdf-svg" />
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                @foreach (var opportunityApplyFile in opportunityApply.OpportunityApplyFiles)
+                                                {
+                                                    var filePath = "/uploads/" + opportunityApplyFile.FileName;
+                                                    <a class="d-inline-block mx-2" href="@filePath" target="_blank">
+                                                        <img src="~/img/pdf.svg" alt="PDF" class="pdf-svg" />
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+﻿@model NoticeIndexViewModel
+
+@{
+    ViewData["Title"] = "Notice";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Notice Page</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Main Photo</h2>
+                        @if (Model.NoticeMainPhoto == null)
+                        {
+                            <a href="/admin/notice/define_main_photo" class="btn btn-primary mb-3">Define Main Photo</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Photo</th>
+                                            <th class="main-color text-center">Title(AZ)</th>
+                                            <th class="main-color text-center">Title(RU)</th>
+                                            <th class="main-color text-center">Title(EN)</th>
+                                            <th class="main-color text-center">Title(TR)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var photoPath = "/uploads/" + Model.NoticeMainPhoto.PhotoName;
+                                            <tr id="@Model.NoticeMainPhoto.Id">
+                                                <td class="text-center">
+                                                    <img src="@photoPath" class="table-image-item" />
+                                                </td>
+                                                <td class="text-center">@Model.NoticeMainPhoto.Title_AZ</td>
+                                                <td class="text-center">@Model.NoticeMainPhoto.Title_RU</td>
+                                                <td class="text-center">@Model.NoticeMainPhoto.Title_EN</td>
+                                                <td class="text-center">@Model.NoticeMainPhoto.Title_TR</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-primary" href="/admin/notice/edit_main_photo">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                        <h2 class="main-color">Component</h2>
+                        @if (Model.NoticeComponent == null)
+                        {
+                            <a href="/admin/notice/define_component" class="btn btn-primary mb-3">Define Component</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Content (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="@Model.NoticeComponent.Id">
+                                            <td class="text-center">@Html.Raw(Model.NoticeComponent.Content_EN)</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary" href="/admin/notice/edit_component">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/notice/details_component">Details</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                    
+                        <h2 class="main-color">Page Access Component</h2>
+                        @if (Model.PageAccessComponent == null)
+                        {
+                            <a href="/admin/notice/define_page_access_component" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Access1 (EN)</th>
+                                            <th class="main-color text-center">Access2 (EN)</th>
+                                            <th class="main-color text-center">Access3 (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr id="@Model.PageAccessComponent.Id">
+                                                <td class="text-center">@Model.PageAccessComponent.Access1_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access2_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access3_EN</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-info mx-2" href="/admin/notice/details_page_access_component/@Model.PageAccessComponent.Id">Details</a>
+                                                        <a class="btn btn-primary" href="/admin/notice/edit_page_access_component/@Model.PageAccessComponent.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,178 @@
+﻿@model ServicesViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Services";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "services";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/services" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/services" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/services" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/services" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/services" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/services" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/services" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/services" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            @{
+                var order = 1;
+                foreach (var servicesComponent in Model.ServicesComponents)
+                {
+                    <div class="services-component row">
+                        <div class="col-12 col-md-7">
+                            <div class="services-component-content mb-2 mb-md-0">
+                                <div class="services-component-content-title d-flex align-items-center">
+                                    <span class="services-component-order main-color-2 mr-4">@order.ToString("00")</span>
+                                    <span class="section-title main-color">
+                                        @if (lang == "az")
+                                        {
+                                            @servicesComponent.Title_AZ
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            @servicesComponent.Title_RU
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            @servicesComponent.Title_EN
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            @servicesComponent.Title_TR
+                                        }
+                                    </span>
+                                </div>
+                                <div class="services-component-content-bottom main-color mt-2 mt-md-5">
+                                    @if (lang == "az")
+                                    {
+                                        @Html.Raw(servicesComponent.Content_AZ)
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @Html.Raw(servicesComponent.Content_RU)
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @Html.Raw(servicesComponent.Content_EN)
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @Html.Raw(servicesComponent.Content_TR)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            @foreach (var servicesComponentPhoto in servicesComponent.ServicesComponentPhotos)
+                            {
+                                var photoPath = "/uploads/" + servicesComponentPhoto.PhotoName;
+                                <img class="w-100 mb-4" src="@photoPath">
+                            }
+                        </div>
+                    </div>
+
+                    order++;
+                }
+
+            }
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)

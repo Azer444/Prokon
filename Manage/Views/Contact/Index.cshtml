@@ -1,0 +1,369 @@
+﻿@model ContactViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Contact";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "contact";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                        @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                        @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                    <a href="/az" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_AZ
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/az/contact" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_AZ
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/az/contact" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_AZ
+                        </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                    <a href="/ru" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_RU
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/ru/contact" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_RU
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/ru/contact" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_RU
+                        </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_EN
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/en/contact" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_EN
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/en/contact" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_EN
+                        </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                    <a href="/" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access1_TR
+                    </a>
+                    <span class="black-color pr-2">/</span>
+                    <a href="/tr/contact" class="black-color pr-2">
+                        @Model.PageAccessComponent?.Access2_TR
+                    </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                        <span class="black-color pr-2">/</span>
+                        <a href="/tr/contact" class="grey-color">
+                            @Model.PageAccessComponent?.Access3_TR
+                        </a>
+                    }
+                }
+            </div>
+            <div class="contact-component position-relative">
+                <div class="contact-map position-relative">
+                    <img class="contact-map-image h-100 w-100" src="/img/snazzy-image (7) 1.png">
+                    <div order="1" class="contact-map-location baku-location text-center position-absolute">
+                        <img src="/img/Vector (5).svg">
+                        @{
+                            var city_1 = Model.ContactComponents.FirstOrDefault(c => c.Title_EN == "Baku");
+                        }
+                        <p class="contact-map-location-name">
+                            @if (city_1 != null)
+                            {
+                                @if (lang == "az")
+                                {
+                                    @city_1.Title_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @city_1.Title_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @city_1.Title_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @city_1.Title_TR
+                                }
+                            }
+                        </p>
+                    </div>
+                    <div order="2" class="contact-map-location ankara-location text-center position-absolute">
+                        <img src="/img/Vector (5).svg">
+                        @{
+                            var city_2 = Model.ContactComponents.FirstOrDefault(c => c.Title_EN == "Ankara");
+                        }
+                        <p class="contact-map-location-name">
+                            @if (city_2 != null)
+                            {
+                                @if (lang == "az")
+                                {
+                                    @city_2.Title_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @city_2.Title_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @city_2.Title_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @city_2.Title_TR
+                                }
+                            }
+                        </p>
+                    </div>
+                    <div order="3" class="contact-map-location moscow-location text-center position-absolute">
+                        <img src="/img/Vector (5).svg">
+                        @{
+                            var city_3 = Model.ContactComponents.FirstOrDefault(c => c.Title_EN == "Moscow");
+                        }
+                        <p class="contact-map-location-name">
+                            @if (city_3 != null)
+                            {
+                                @if (lang == "az")
+                                {
+                                    @city_3.Title_AZ
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @city_3.Title_RU
+                                }
+                                else if (lang == "en")
+                                {
+                                    @city_3.Title_EN
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @city_3.Title_TR
+                                }
+                            }
+                    </div>
+                </div>
+
+                @{
+                    var bakuComponent = Model.ContactComponents.FirstOrDefault(c => c.Title_EN == "Baku");
+                    var ankaraComponent = Model.ContactComponents.FirstOrDefault(c => c.Title_EN == "Ankara");
+                    var moscowComponent = Model.ContactComponents.FirstOrDefault(c => c.Title_EN == "Moscow");
+                }
+                @if (bakuComponent != null)
+                {
+                    <div order="1" class="contact-map-info row main-color position-absolute">
+                        <div class="col-12 col-md-6 order-12 order-md-1 px-md-0">
+                            <div class="contact-map-info-content">
+                                <h2 class="contact-map-info-content-title main-color-2">
+                                    @if (lang == "az")
+                                    {
+                                        @bakuComponent.Title_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @bakuComponent.Title_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @bakuComponent.Title_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @bakuComponent.Title_TR
+                                    }
+                                </h2>
+                                @if (lang == "az")
+                                {
+                                    @Html.Raw(bakuComponent.Content_AZ)
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @Html.Raw(bakuComponent.Content_RU)
+                                }
+                                else if (lang == "en")
+                                {
+                                    @Html.Raw(bakuComponent.Content_EN)
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @Html.Raw(bakuComponent.Content_TR)
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 order-1 order-md-12 px-md-0 position-relative">
+                            <div class="contact-map-info-image">
+                                @{
+                                    var bakuPhotoPath = "/uploads/" + bakuComponent.PhotoName;
+                                }
+                                <img class="w-100" src="@bakuPhotoPath">
+                                <img src="/img/plus.svg" order="1" class="contact-info-close-icon position-absolute">
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (ankaraComponent != null)
+                {
+                    <div order="2" class="contact-map-info row main-color position-absolute">
+                        <div class="col-12 col-md-6 order-12 order-md-1 px-md-0">
+                            <div class="contact-map-info-content">
+                                <h2 class="contact-map-info-content-title main-color-2">
+                                    @if (lang == "az")
+                                    {
+                                        @ankaraComponent.Title_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @ankaraComponent.Title_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @ankaraComponent.Title_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @ankaraComponent.Title_TR
+                                    }
+                                </h2>
+                                @if (lang == "az")
+                                {
+                                    @Html.Raw(ankaraComponent.Content_AZ)
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @Html.Raw(ankaraComponent.Content_RU)
+                                }
+                                else if (lang == "en")
+                                {
+                                    @Html.Raw(ankaraComponent.Content_EN)
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @Html.Raw(ankaraComponent.Content_TR)
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 order-1 order-md-12 px-md-0 position-relative">
+                            <div class="contact-map-info-image">
+                                @{
+                                    var ankaraPhotoPath = "/uploads/" + ankaraComponent.PhotoName;
+                                }
+                                <img class="w-100" src="@ankaraPhotoPath">
+                                <img src="/img/plus.svg" order="2" class="contact-info-close-icon position-absolute">
+                            </div>
+                        </div>
+                    </div>
+                }
+                @if (moscowComponent != null)
+                {
+                    <div order="3" class="contact-map-info row main-color position-absolute">
+                        <div class="col-12 col-md-6 order-12 order-md-1 px-md-0">
+                            <div class="contact-map-info-content">
+                                <h2 class="contact-map-info-content-title main-color-2">
+                                    @if (lang == "az")
+                                    {
+                                        @moscowComponent.Title_AZ
+                                    }
+                                    else if (lang == "ru")
+                                    {
+                                        @moscowComponent.Title_RU
+                                    }
+                                    else if (lang == "en")
+                                    {
+                                        @moscowComponent.Title_EN
+                                    }
+                                    else if (lang == "tr")
+                                    {
+                                        @moscowComponent.Title_TR
+                                    }
+                                </h2>
+                                @if (lang == "az")
+                                {
+                                    @Html.Raw(moscowComponent.Content_AZ)
+                                }
+                                else if (lang == "ru")
+                                {
+                                    @Html.Raw(moscowComponent.Content_RU)
+                                }
+                                else if (lang == "en")
+                                {
+                                    @Html.Raw(moscowComponent.Content_EN)
+                                }
+                                else if (lang == "tr")
+                                {
+                                    @Html.Raw(moscowComponent.Content_TR)
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 order-1 order-md-12 px-md-0 position-relative">
+                            <div class="contact-map-info-image">
+                                @{
+                                    var moscowPhotoPath = "/uploads/" + moscowComponent.PhotoName;
+                                }
+                                <img class="w-100" src="@moscowPhotoPath">
+                                <img src="/img/plus.svg" order="3" class="contact-info-close-icon position-absolute">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
+
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)
+
+@section Scripts{
+    <script src="~/js/contact.js"></script>
+}

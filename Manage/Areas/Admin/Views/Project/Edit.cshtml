@@ -1,0 +1,343 @@
+﻿
+@model ProjectEditViewModel
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <h1 class="main-color">Edit Project</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <form asp-action="edit" asp-controller="project" asp-area="admin" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="Id" value="@Model.Id" />
+                            <div class="container">
+                                <div class="row main-color">
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Name</h3>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name_AZ" class="control-label"></label>
+                                            <input asp-for="Name_AZ" class="form-control">
+                                            <span asp-validation-for="Name_AZ" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name_RU" class="control-label"></label>
+                                            <input asp-for="Name_RU" class="form-control">
+                                            <span asp-validation-for="Name_RU" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name_EN" class="control-label"></label>
+                                            <input asp-for="Name_EN" class="form-control">
+                                            <span asp-validation-for="Name_EN" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Name_TR" class="control-label"></label>
+                                            <input asp-for="Name_TR" class="form-control">
+                                            <span asp-validation-for="Name_TR" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Slug</h3>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label asp-for="Slug" class="control-label"></label>
+                                            <input readonly asp-for="Slug" class="form-control">
+                                            <span asp-validation-for="Slug" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Type</h3>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <select asp-for="Type" class="selectbox w-100">
+                                                <option value="current">Current</option>
+                                                <option value="completed">Completed</option>
+                                            </select>
+                                            <span asp-validation-for="Type" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Order</h3>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <input asp-for="CurrentOrder" class="form-control">
+                                            <span asp-validation-for="CurrentOrder" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Location</h3>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Location_AZ" class="control-label"></label>
+                                            <input asp-for="Location_AZ" class="form-control">
+                                            <span asp-validation-for="Location_AZ" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Location_RU" class="control-label"></label>
+                                            <input asp-for="Location_RU" class="form-control">
+                                            <span asp-validation-for="Location_RU" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Location_EN" class="control-label"></label>
+                                            <input asp-for="Location_EN" class="form-control">
+                                            <span asp-validation-for="Location_EN" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Location_TR" class="control-label"></label>
+                                            <input asp-for="Location_TR" class="form-control">
+                                            <span asp-validation-for="Location_TR" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Description</h3>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Description_AZ" class="control-label"></label>
+                                            <textarea asp-for="Description_AZ" class="form-control">@Html.Raw(Model.Description_AZ)</textarea>
+                                            <span asp-validation-for="Description_AZ" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Description_RU" class="control-label"></label>
+                                            <textarea asp-for="Description_RU" class="form-control">@Html.Raw(Model.Description_RU)</textarea>
+                                            <span asp-validation-for="Description_RU" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Description_EN" class="control-label"></label>
+                                            <textarea asp-for="Description_EN" class="form-control">@Html.Raw(Model.Description_EN)</textarea>
+                                            <span asp-validation-for="Description_EN" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Description_TR" class="control-label"></label>
+                                            <textarea asp-for="Description_TR" class="form-control">@Html.Raw(Model.Description_TR)</textarea>
+                                            <span asp-validation-for="Description_TR" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Dates</h3>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="StartingDate" class="control-label"></label>
+                                            <input type="date" asp-for="StartingDate" class="form-control">
+                                            <span asp-validation-for="StartingDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="PlannedCompletionDate" class="control-label"></label>
+                                            <input type="date" asp-for="PlannedCompletionDate" class="form-control">
+                                            <span asp-validation-for="PlannedCompletionDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 d-none">
+                                        <div class="form-group">
+                                            <label asp-for="CompletedDate" class="control-label"></label>
+                                            <input type="date" asp-for="CompletedDate" class="form-control d-none">
+                                            <span asp-validation-for="CompletedDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Title Photo</h3>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            @{
+                                                var photoPath = "/uploads/" + Model.TitlePhotoName;
+                                            }
+                                            <img class="table-image-item" src="@photoPath" />
+                                            <label class="d-flex m-0 bold-text" for=""><span>Title Photo</span></label>
+                                            <div class="custom-file">
+                                                <input asp-for="TitlePhoto" class="form-control custom-file-input" accept="image/*" />
+                                                <label class="custom-file-label">
+                                                    Change title photo...
+                                                </label>
+                                            </div>
+                                            <span class="text-danger validate-message d-inline-block py-2" asp-validation-for="TitlePhoto"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <h3 class="main-color">Optional Photos</h3>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="main-color text-center">Photo</th>
+                                                            <th class="main-color text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var projectPhoto in Model.ProjectPhotos)
+                                                        {
+                                                            var projectPhotoPath = "/uploads/" + projectPhoto.PhotoName;
+                                                            <tr id="@projectPhoto.Id">
+                                                                <td class="text-center">
+                                                                    <img src="@projectPhotoPath" class="table-image-item" />
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <a class="btn btn-danger delete-btn text-white">Delete</a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <label class="d-flex m-0 bold-text" for=""><span>Photos</span></label>
+                                            <div class="custom-file">
+                                                <input asp-for="Photos" class="form-control custom-file-input" multiple accept="image/*" />
+                                                <label class="custom-file-label">
+                                                    Add optional photo...
+                                                </label>
+                                            </div>
+                                            <span class="text-danger validate-message d-inline-block py-2" asp-validation-for="Photos"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <input asp-for="ShowOnHomePage" type="checkbox" onchange="this.value=this.checked">
+                                        <span>Show on Home page</span>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="HomePageOrder" class="control-label"></label>
+                                            <input asp-for="HomePageOrder" class="form-control">
+                                            <span asp-validation-for="HomePageOrder" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <input asp-for="ShowAsGallery" type="checkbox" onchange="this.value=this.checked">
+                                        <span>Show as Gallery</span>
+                                    </div>
+                                    <div id="home-page-as-gallery" class="col-12">
+                                        <input asp-for="ShowOnHomePageAsGallery" type="checkbox" onchange="this.value=this.checked">
+                                        <span>Show on Home page as Gallery</span>
+                                    </div>
+                                    <div id="gallery-order" class="col-12 d-none">
+                                        <div class="form-group">
+                                            <span>Gallery Order</span>
+                                            <select asp-for="GalleryOrder" class="selectbox">
+                                                @foreach (var order in ViewBag.Orders)
+                                                {
+                                                    <option value="@order">@order</option>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="GalleryOrder" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <div class="form-group">
+                                            <input type="submit" value="Edit" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <a asp-action="index" asp-controller="project" class="main-color">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/vendor/slug/slug.js"></script>
+    <script src="~/js/project-admin.js"></script>
+    <script src="~/js/show_file_name.js"></script>
+    <script src="~/vendor/ckeditor/ckeditor.js"></script>
+
+    <!-- validate js -->
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description_AZ'), {
+                viewportTopOffset: 50,
+                toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList', 'insertTable']
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
+        ClassicEditor
+            .create(document.querySelector('#Description_RU'), {
+                viewportTopOffset: 50,
+                toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList', 'insertTable']
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
+
+        ClassicEditor
+            .create(document.querySelector('#Description_EN'), {
+                viewportTopOffset: 50,
+                toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList', 'insertTable']
+            })
+            .catch(error => {
+                console.error(error);
+            })
+
+        ClassicEditor
+            .create(document.querySelector('#Description_TR'), {
+                viewportTopOffset: 50,
+                toolbar: ['heading', '|', 'bold', 'italic', 'bulletedList', 'insertTable']
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    </script>
+    <script>
+        $(document).on("click", ".delete-btn", function () {
+
+            var deleteBtn = $(this);
+            var projectPhoto = $(this).parents().eq(1);
+
+            var data = {
+                id: $(projectPhoto).attr('id')
+            }
+
+            $.ajax({
+                url: "@Url.Action("delete_project_photo","project")",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(projectPhoto).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

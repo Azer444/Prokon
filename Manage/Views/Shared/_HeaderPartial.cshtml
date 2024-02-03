@@ -1,0 +1,235 @@
+﻿@model HeaderPartialViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    var controller = Url.ActionContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = Url.ActionContext.RouteData.Values["action"].ToString().ToLower();
+    var id = Url.ActionContext.RouteData.Values["id"]?.ToString();
+}
+
+<header class="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    @*<div class="header-top-left d-flex align-items-center">
+                        <span class="phone-number">@Model.SiteConfig?.Phone</span>
+                    </div>*@
+                </div>
+                <div class="col-4">
+                    <div class="header-top-right h-100 d-flex align-items-center justify-content-end">
+                        @*<span class="d-none d-md-inline-block">@Model.SiteConfig?.Email</span>*@
+                        <a href="@Model.SiteConfig?.LinkedinLink" target="_blank">
+                            <i class="fab fa-linkedin-in text-white"></i>
+                        </a>
+                        <a href="@Model.SiteConfig?.FacebookLink" target="_blank">
+                            <i class="fab fa-facebook-f text-white mx-4"></i>
+                        </a>
+                        <a href="@Model.SiteConfig?.TwitterLink" target="_blank">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    @{
+                        var link = "/" + lang + "/home";
+                    }
+                    <a href="@link" class="header-bottom-left d-block">
+                        @{
+                            var logoPath = "/uploads/" + Model.SiteConfig?.FirstLogoName;
+                        }
+                        <img class="header-logo" src="@logoPath">
+                    </a>
+                </div>
+                <div class="col-9 d-none d-lg-block">
+                    <div class="header-bottom-right h-100 d-flex align-items-center justify-content-between">
+                        <ul class="navigation d-flex">
+                            @foreach (var navTitleComponent in Model.NavTitleComponents)
+                            {
+                                <li class="nav-element">
+                                    @if (navTitleComponent.NavComponents.Count == 0)
+                                    {
+                                        if (lang == "az")
+                                        {
+                                            <a class="title" href="/az/@navTitleComponent.Link">
+                                                @navTitleComponent.Title_AZ
+                                            </a>
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            <a class="title" href="/ru/@navTitleComponent.Link">
+                                                @navTitleComponent.Title_RU
+                                            </a>
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            <a class="title" href="/en/@navTitleComponent.Link">
+                                                @navTitleComponent.Title_EN
+                                            </a>
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            <a class="title" href="/tr/@navTitleComponent.Link">
+                                                @navTitleComponent.Title_TR
+                                            </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (lang == "az")
+                                        {
+                                            <a class="title">
+                                                @navTitleComponent.Title_AZ
+                                            </a>
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            <a class="title">
+                                                @navTitleComponent.Title_RU
+                                            </a>
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            <a class="title">
+                                                @navTitleComponent.Title_EN
+                                            </a>
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            <a class="title">
+                                                @navTitleComponent.Title_TR
+                                            </a>
+                                        }
+                                        <div class="sub-menu">
+                                            <div class="sub-menu-wrapper">
+                                                @foreach (var navComponent in navTitleComponent.NavComponents)
+                                                {
+                                                    if (navComponent.NavSubComponents.Count == 0)
+                                                    {
+                                                        if (lang == "az")
+                                                        {
+                                                            <div>
+                                                                <a href="/az/@navComponent.Link">@navComponent.Title_AZ</a>
+                                                            </div>
+                                                        }
+                                                        else if (lang == "ru")
+                                                        {
+                                                            <div>
+                                                                <a href="/ru/@navComponent.Link">@navComponent.Title_RU</a>
+                                                            </div>
+                                                        }
+                                                        else if (lang == "en")
+                                                        {
+                                                            <div>
+                                                                <a href="/en/@navComponent.Link">@navComponent.Title_EN</a>
+                                                            </div>
+                                                        }
+                                                        else if (lang == "tr")
+                                                        {
+                                                            <div>
+                                                                <a href="/tr/@navComponent.Link">@navComponent.Title_TR</a>
+                                                            </div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="sub-menu-item-collection">
+                                                            @{
+                                                                <p class="sub-menu-item-collection-title mb-1">
+                                                                    @{
+                                                                        if (lang == "az")
+                                                                        {
+                                                                            @navComponent.Title_AZ
+                                                                        }
+                                                                        else if (lang == "ru")
+                                                                        {
+                                                                            @navComponent.Title_RU
+                                                                        }
+                                                                        else if (lang == "en")
+                                                                        {
+                                                                            @navComponent.Title_EN
+                                                                        }
+                                                                        else if (lang == "tr")
+                                                                        {
+                                                                            @navComponent.Title_TR
+                                                                        }
+                                                                    }
+                                                                </p>
+                                                            }
+                                                            @foreach (var navSubComponent in navComponent.NavSubComponents)
+                                                            {
+                                                                if (lang == "az")
+                                                                {
+                                                                    <div>
+                                                                        <a href="/az/@navSubComponent.Link" class="ml-3">@navSubComponent.Title_AZ</a>
+                                                                    </div>
+                                                                }
+                                                                else if (lang == "ru")
+                                                                {
+                                                                    <div>
+                                                                        <a href="/ru/@navSubComponent.Link" class="ml-3">@navSubComponent.Title_RU</a>
+                                                                    </div>
+                                                                }
+                                                                else if (lang == "en")
+                                                                {
+                                                                    <div>
+                                                                        <a href="/en/@navSubComponent.Link" class="ml-3">@navSubComponent.Title_EN</a>
+                                                                    </div>
+                                                                }
+                                                                else if (lang == "tr")
+                                                                {
+                                                                    <div>
+                                                                        <a href="/en/@navSubComponent.Link" class="ml-3">@navSubComponent.Title_TR</a>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                        <!--<div class="d-flex">-->
+                            @*<img class="search-icon" src="/img/Vector.png">*@
+                            <!--<div class="select-box position-relative ml-5">
+                                <span class="active-lang main-color">EN</span>
+                                <img src="/img/arrow-down.svg">
+                                <div class="droplist position-absolute">
+                                    if (action == "index")
+                                    {
+                                        <a href="/az/controller">AZ</a>
+                                        <a href="/en/controller">EN</a>
+                                        <a href="/tr/controller">TR</a>
+                                        <a href="/ru/controller">RU</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/az/controller/action/id">AZ</a>
+                                        <a href="/en/controller/action/id">EN</a>
+                                        <a href="/tr/controller/action/id">TR</a>
+                                        <a href="/ru/controller/action/id">RU</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="col-6 d-flex align-items-center justify-content-end d-lg-none">
+                    <div class="bar-icon">
+                        <span class="line d-block ml-2"></span>
+                        <span class="line-2 mt-2 d-block"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

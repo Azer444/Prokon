@@ -1,0 +1,174 @@
+﻿@model GovernanceIndexViewModel
+
+@{
+    ViewData["Title"] = "Governance";
+}
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+    @await Html.PartialAsync("_SidebarPartial")
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+            @await Html.PartialAsync("_TopbarPartial")
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header main-background py-3">
+                        <h6 class="m-0 font-weight-bold text-white">Governance Page</h6>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="main-color">Main Photo</h2>
+                        @if (Model.GovernanceMainPhoto == null)
+                        {
+                            <a href="/admin/governance/define_main_photo/" class="btn btn-primary mb-3">Define Main Photo</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Photo</th>
+                                            <th class="main-color text-center">Title(AZ)</th>
+                                            <th class="main-color text-center">Title(RU)</th>
+                                            <th class="main-color text-center">Title(EN)</th>
+                                            <th class="main-color text-center">Title(TR)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var photoPath = "/uploads/" + Model.GovernanceMainPhoto.PhotoName;
+                                            <tr id="@Model.GovernanceMainPhoto.Id">
+                                                <td class="text-center">
+                                                    <img src="@photoPath" class="table-image-item" />
+                                                </td>
+                                                <td class="text-center">@Model.GovernanceMainPhoto.Title_AZ</td>
+                                                <td class="text-center">@Model.GovernanceMainPhoto.Title_RU</td>
+                                                <td class="text-center">@Model.GovernanceMainPhoto.Title_EN</td>
+                                                <td class="text-center">@Model.GovernanceMainPhoto.Title_TR</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-primary" href="/admin/governance/edit_main_photo/@Model.GovernanceMainPhoto.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+
+                        <br />
+
+                        <h2 class="main-color">Components</h2>
+                        <a href="/admin/governance/add_component" class="btn btn-primary mb-3">Add Component</a>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th class="main-color text-center">Photo</th>
+                                        <th class="main-color text-center">Title(AZ)</th>
+                                        <th class="main-color text-center">Title(RU)</th>
+                                        <th class="main-color text-center">Title(EN)</th>
+                                        <th class="main-color text-center">Title(TR)</th>
+                                        <th class="main-color text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var governanceComponent in Model.GovernanceComponents
+                                 )
+                                    {
+                                        var photoPath = "/uploads/" + governanceComponent.PhotoName;
+                                        <tr id="@governanceComponent.Id">
+                                            <td class="text-center">
+                                                <img src="@photoPath" class="table-image-item" />
+                                            </td>
+                                            <td class="text-center">@governanceComponent.Title_AZ</td>
+                                            <td class="text-center">@governanceComponent.Title_RU</td>
+                                            <td class="text-center">@governanceComponent.Title_EN</td>
+                                            <td class="text-center">@governanceComponent.Title_TR</td>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn btn-primary" href="/admin/governance/edit_component/@governanceComponent.Id">Edit</a>
+                                                    <a class="btn btn-info mx-2" href="/admin/governance/details_component/@governanceComponent.Id">Details</a>
+                                                    <a class="btn btn-danger delete-component text-white">Delete</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <br />
+
+                        <h2 class="main-color">Page Access Component</h2>
+                        @if (Model.PageAccessComponent == null)
+                        {
+                            <a href="/admin/governance/define_page_access_component/" class="btn btn-primary mb-3">Define</a>
+                        }
+                        else
+                        {
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="main-color text-center">Access1 (EN)</th>
+                                            <th class="main-color text-center">Access2 (EN)</th>
+                                            <th class="main-color text-center">Access3 (EN)</th>
+                                            <th class="main-color text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            <tr id="@Model.PageAccessComponent.Id">
+                                                <td class="text-center">@Model.PageAccessComponent.Access1_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access2_EN</td>
+                                                <td class="text-center">@Model.PageAccessComponent.Access3_EN</td>
+                                                <td class="text-center">
+                                                    <div class="d-flex justify-content-center">
+                                                        <a class="btn btn-info mx-2" href="/admin/governance/details_page_access_component/@Model.PageAccessComponent.Id">Details</a>
+                                                        <a class="btn btn-primary" href="/admin/governance/edit_page_access_component/@Model.PageAccessComponent.Id">Edit</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".delete-component", function () {
+
+            var deleteBtn = $(this);
+            var governanceComponent = $(this).parents().eq(2);
+
+            var data = {
+                id: $(governanceComponent).attr('id')
+            }
+
+            $.ajax({
+                url: "/admin/governance/delete_component",
+                data: data,
+                success: function () {
+                    $(deleteBtn).text("Deleted");
+                    $(deleteBtn).css("pointer-events", "none");
+                    $(governanceComponent).fadeOut("normal", function () {
+                        $(this).remove();
+                    });
+                }
+            })
+        })
+    </script>
+}

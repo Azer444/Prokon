@@ -1,0 +1,216 @@
+﻿@model MobileMenuPartialViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    var controller = Url.ActionContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = Url.ActionContext.RouteData.Values["action"].ToString().ToLower();
+    var id = Url.ActionContext.RouteData.Values["id"]?.ToString();
+}
+
+<section class="mobile-menu-section">
+    <div class="mobile-menu-section-wrapper">
+        <div class="container">
+            <div class="mobile-menu-top row">
+                <div class="col-6">
+                    @{
+                        var logoPath = "/uploads/" + Model.SiteConfig?.SecondLogoName;
+                        var link = "/" + lang + "/home";
+                    }
+                    <a href="@link">
+                        <img src="@logoPath">
+                    </a>
+                </div>
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    @*<div class="select-box position-relative ml-5">
+                        <span class="active-lang">EN</span>
+                        <img src="/img/Vector (9).svg">
+                        <div class="droplist position-absolute">
+                            @if (action == "index")
+                            {
+                                <a href="/az/@controller">AZ</a>
+                                <a href="/en/@controller">EN</a>
+                                <a href="/tr/@controller">TR</a>
+                                <a href="/ru/@controller">RU</a>
+                            }
+                            else
+                            {
+                                <a href="/az/@controller/@action/@id">AZ</a>
+                                <a href="/en/@controller/@action/@id">EN</a>
+                                <a href="/tr/@controller/@action/@id">TR</a>
+                                <a href="/ru/@controller/@action/@id">RU</a>
+                            }
+                        </div>
+                    </div>*@
+                    <img class="close-menu-icon ml-4" src="~/img/_x_white.svg">
+                </div>
+            </div>
+            <div class="mobile-menu-center row">
+                <div class="col-5 p-r-5">
+                    <div class="mobile-menu-bar">
+                        @{
+                            var pageId = 1;
+                            foreach (var navTitleComponent in Model.NavTitleComponents)
+                            {
+                                if (navTitleComponent.NavComponents.Count > 0)
+                                {
+                                    <div class="mm-bar-item-container">
+                                        <a page-id="@pageId" class="mm-bar-item">
+                                            @if (lang == "az")
+                                            {
+                                                @navTitleComponent.Title_AZ
+                                            }
+                                            else if (lang == "ru")
+                                            {
+                                                @navTitleComponent.Title_RU
+                                            }
+                                            else if (lang == "en")
+                                            {
+                                                @navTitleComponent.Title_EN
+                                            }
+                                            else if (lang == "tr")
+                                            {
+                                                @navTitleComponent.Title_TR
+                                            }
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mm-bar-item-container">
+                                        @if (lang == "az")
+                                        {
+                                            <a href="/az/@navTitleComponent.Link" class="mm-bar-item">@navTitleComponent.Title_AZ</a>
+                                        }
+                                        else if (lang == "ru")
+                                        {
+                                            <a href="/ru/@navTitleComponent.Link" class="mm-bar-item">@navTitleComponent.Title_RU</a>
+                                        }
+                                        else if (lang == "en")
+                                        {
+                                            <a href="/en/@navTitleComponent.Link" class="mm-bar-item">@navTitleComponent.Title_EN</a>
+                                        }
+                                        else if (lang == "tr")
+                                        {
+                                            <a href="/tr/@navTitleComponent.Link" class="mm-bar-item">@navTitleComponent.Title_TR</a>
+                                        }
+                                    </div>
+                                }
+
+                                pageId++;
+                            }
+
+                        }
+                    </div>
+                </div>
+                <div class="col-7 p-l-5">
+                    <div class="mm-bar-items-components position-relative">
+                        @{
+                            var pageId_ = 1;
+                            foreach (var navTitleComponent in Model.NavTitleComponents)
+                            {
+                                if (navTitleComponent.NavComponents.Count > 0)
+                                {
+                                    <div page-id="@pageId_" class="mm-bar-item-components position-absolute d-none">
+                                        @foreach (var navComponent in navTitleComponent.NavComponents)
+                                        {
+                                            if (navComponent.NavSubComponents.Count == 0)
+                                            {
+                                                <div class="mm-bar-item-component-container">
+                                                    @if (lang == "az")
+                                                    {
+                                                        <a href="/az/@navComponent.Link" class="mm-bar-item-component">@navComponent.Title_AZ</a>
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        <a href="/ru/@navComponent.Link" class="mm-bar-item-component">@navComponent.Title_RU</a>
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        <a href="/en/@navComponent.Link" class="mm-bar-item-component">@navComponent.Title_EN</a>
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        <a href="/tr/@navComponent.Link" class="mm-bar-item-component">@navComponent.Title_TR</a>
+                                                    }
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="mm-bar-item-component-collection">
+                                                    @if (lang == "az")
+                                                    {
+                                                        <h3 class="mm-bar-item-component-collection-title">@navComponent.Title_AZ</h3>
+                                                    }
+                                                    else if (lang == "ru")
+                                                    {
+                                                        <h3 class="mm-bar-item-component-collection-title">@navComponent.Title_RU</h3>
+                                                    }
+                                                    else if (lang == "en")
+                                                    {
+                                                        <h3 class="mm-bar-item-component-collection-title">@navComponent.Title_EN</h3>
+                                                    }
+                                                    else if (lang == "tr")
+                                                    {
+                                                        <h3 class="mm-bar-item-component-collection-title">@navComponent.Title_TR</h3>
+                                                    }
+                                                    @foreach (var navSubComponent in navComponent.NavSubComponents)
+                                                    {
+                                                        <div class="mm-bar-item-component-container">
+                                                            @if (lang == "az")
+                                                            {
+                                                                <a href="/az/@navSubComponent.Link" class="mm-bar-item-component ml-3">@navSubComponent.Title_AZ</a>
+                                                            }
+                                                            else if (lang == "ru")
+                                                            {
+                                                                <a href="/ru/@navSubComponent.Link" class="mm-bar-item-component ml-3">@navSubComponent.Title_RU</a>
+                                                            }
+                                                            else if (lang == "en")
+                                                            {
+                                                                <a href="/en/@navSubComponent.Link" class="mm-bar-item-component ml-3">@navSubComponent.Title_EN</a>
+                                                            }
+                                                            else if (lang == "tr")
+                                                            {
+                                                                <a href="/tr/@navSubComponent.Link" class="mm-bar-item-component ml-3">@navSubComponent.Title_TR</a>
+                                                            }
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                }
+
+                                pageId_++;
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu-bottom row">
+                <div class="col-8 mb-3">
+                    <span class="address">
+                        @if (lang == "az")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_AZ)
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_RU)
+                        }
+                        else if (lang == "en")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_EN)
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_TR)
+                        }
+                    </span>
+                </div>
+                <div class="col-12 d-flex justify-content-between">
+                    <span class="">@Model.SiteConfig?.Email</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

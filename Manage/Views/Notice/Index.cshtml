@@ -1,0 +1,139 @@
+﻿@model NoticeViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+    ViewData["Title"] = "Prokon | Legal Notice";
+    var mainPhotoPath = "/uploads/" + Model.PageMainPhoto?.PhotoName;
+    ViewData["Image"] = "uploads/" + Model.PageMainPhoto?.PhotoName; 
+    ViewData["Description"] = Model.PageMainPhoto?.Title_EN;
+    ViewData["Link"] = "notice";
+}
+
+@await Html.PartialAsync("_HeaderPartial", Model.HeaderPartialViewModel)
+
+<main>
+    <section class="main-photo-section">
+        <div class="main-photo position-relative" style="background-image: url('@mainPhotoPath');"></div>
+        <div class="cover">
+            <div class="container">
+                <p class="main-photo-title position-absolute">
+                    @if (lang == "az")
+                    {
+                    @Model.PageMainPhoto?.Title_AZ
+                    }
+                    else if (lang == "ru")
+                    {
+                    @Model.PageMainPhoto?.Title_RU
+                    }
+                    else if (lang == "en")
+                    {
+                    @Model.PageMainPhoto?.Title_EN
+                    }
+                    else if (lang == "tr")
+                    {
+                    @Model.PageMainPhoto?.Title_TR
+                    }
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="page-content-section">
+        <div class="container">
+            <div class="page-access">
+                @if (lang == "az")
+                {
+                <a href="/az" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access1_AZ
+                </a>
+                <span class="black-color pr-2">/</span>
+                <a href="/az/notice" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access2_AZ
+                </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_AZ))
+                    {
+                <span class="black-color pr-2">/</span>
+                <a href="/az/notice" class="grey-color">
+                    @Model.PageAccessComponent?.Access3_AZ
+                </a>
+                    }
+                }
+                else if (lang == "ru")
+                {
+                <a href="/ru" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access1_RU
+                </a>
+                <span class="black-color pr-2">/</span>
+                <a href="/ru/notice" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access2_RU
+                </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_RU))
+                    {
+                <span class="black-color pr-2">/</span>
+                <a href="/ru/notice" class="grey-color">
+                    @Model.PageAccessComponent?.Access3_RU
+                </a>
+                    }
+                }
+                else if (lang == "en")
+                {
+                <a href="/" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access1_EN
+                </a>
+                <span class="black-color pr-2">/</span>
+                <a href="/en/notice" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access2_EN
+                </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_EN))
+                    {
+                <span class="black-color pr-2">/</span>
+                <a href="/en/notice" class="grey-color">
+                    @Model.PageAccessComponent?.Access3_EN
+                </a>
+                    }
+                }
+                else if (lang == "tr")
+                {
+                <a href="/" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access1_TR
+                </a>
+                <span class="black-color pr-2">/</span>
+                <a href="/tr/notice" class="black-color pr-2">
+                    @Model.PageAccessComponent?.Access2_TR
+                </a>
+                    if (!string.IsNullOrEmpty(Model.PageAccessComponent?.Access3_TR))
+                    {
+                <span class="black-color pr-2">/</span>
+                <a href="/tr/notice" class="grey-color">
+                    @Model.PageAccessComponent?.Access3_TR
+                </a>
+                    }
+                }
+            </div>
+            <div class="row">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="notice-component d-flex justify-content-center">
+                        @if (lang == "az")
+                        {
+                        @Html.Raw(Model.NoticeComponent?.Content_AZ)
+                        }
+                        else if (lang == "ru")
+                        {
+                        @Html.Raw(Model.NoticeComponent?.Content_RU)
+                        }
+                        else if (lang == "en")
+                        {
+                        @Html.Raw(Model.NoticeComponent?.Content_EN)
+                        }
+                        else if (lang == "tr")
+                        {
+                        @Html.Raw(Model.NoticeComponent?.Content_TR)
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@await Html.PartialAsync("_FooterPartial", Model.FooterPartialViewModel)
+@await Html.PartialAsync("_MobileMenuPartial", Model.MobileMenuPartialViewModel)

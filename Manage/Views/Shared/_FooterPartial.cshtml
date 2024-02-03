@@ -1,0 +1,491 @@
+﻿@model FooterPartialViewModel
+
+@{
+    var lang = Url.ActionContext.RouteData.Values["lang"].ToString();
+}
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-lg d-none d-lg-block">
+            <div class="footer-md-top row">
+                <div class="col-2">
+                    @{
+                        var navTitleComponents = Model.NavTitleComponents.Take(3);
+                    }
+                    <ul>
+                        @foreach (var navTitleComponent in navTitleComponents)
+                        {
+                            <li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_AZ
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_RU
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_EN
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_TR
+                                    </a>
+                                }
+                            </li>
+                        }
+                        @*<li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/privacy">
+                                        Gizlilik bölümü
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/privacy">
+                                        Раздел конфиденциальности
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/privacy">
+                                        Privacy section
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/privacy">
+                                        Gizlilik bölümü
+                                    </a>
+                                }
+                            </li>
+                            <li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/notice">
+                                        Qanuni bildiriş
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/notice">
+                                        Юридическое уведомление
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/notice">
+                                        Legal notice
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/notice">
+                                        Yasal uyarı
+                                    </a>
+                                }
+                            </li>*@
+                        <li>
+                            @if (lang == "az")
+                            {
+                                <a href="/az/sitemap">
+                                    Sayt xəritəsi
+                                </a>
+                            }
+                            else if (lang == "ru")
+                            {
+                                <a href="/ru/sitemap">
+                                    Карта сайта
+                                </a>
+                            }
+                            else if (lang == "en")
+                            {
+                                <a href="/en/sitemap">
+                                    Sitemap
+                                </a>
+                            }
+                            else if (lang == "tr")
+                            {
+                                <a href="/tr/sitemap">
+                                    Site haritası
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-2">
+                    @{
+                        var navTitleComponents_ = Model.NavTitleComponents.Skip(3).Take(3);
+                    }
+                    <ul>
+                        @foreach (var navTitleComponent in navTitleComponents_)
+                        {
+                            <li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_AZ
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_RU
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_EN
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_TR
+                                    </a>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-6 footer-contact-text">
+                    <div>
+                        @if (lang == "az")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_AZ)
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_RU)
+                        }
+                        else if (lang == "en")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_EN)
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Html.Raw(Model.SiteConfig?.HeadOffice_TR)
+                        }
+                        @Model.SiteConfig?.Phone
+                    </div>
+                </div>
+            </div>
+            <div class="footer-md-center row">
+                <div class="col-3 d-flex align-items-center">
+                    @{
+                        var footerLogoPath = "/uploads/" + Model.SiteConfig?.SecondLogoName;
+                        var link = "/" + lang + "/home";
+                    }
+                    <a class="d-block" href="@link">
+                        <img class="prokon-logo-2" src="@footerLogoPath">
+                    </a>
+                </div>
+                <div class="col-6 d-flex align-items-center justify-content-between">
+                    @if (Model.SiteConfig != null)
+                    {
+                        var middlePhotos = Model.SiteConfig?.FooterPartners.Take(4);
+                        foreach (var footerPartner in middlePhotos)
+                        {
+                            var footerPartnerLogoPath = "/uploads/" + footerPartner.PhotoName;
+
+                            <img class="footer-center-logo" src="@footerPartnerLogoPath" />
+                        }
+                    }
+                </div>
+                <div class="col-3 d-flex align-items-center">
+                    @{
+                        var photo = Model.SiteConfig?.FooterPartners.Skip(4).FirstOrDefault();
+
+                        if (photo != null)
+                        {
+                            var photoPath = "/uploads/" + photo.PhotoName;
+                            <img src="@photoPath" />
+                        }
+                    }
+                </div>
+            </div>
+            <div class="footer-md-bottom row">
+                <div class="col-6">
+                    <a href="@Model.SiteConfig?.LinkedinLink">
+                        @if (lang == "az" || lang == "en" || lang == "tr")
+                        {
+                            @Model.SiteConfig?.LinkedinText
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.LinkedinText_RU
+                        }
+                    </a>
+                    <a href="@Model.SiteConfig?.FacebookLink" class="mx-3">
+                        @if (lang == "az" || lang == "en" || lang == "tr")
+                        {
+                            @Model.SiteConfig?.FacebookText
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.FacebookText_RU
+                        }
+                    </a>
+                    <a href="@Model.SiteConfig?.TwitterLink">
+                        @if (lang == "az" || lang == "en" || lang == "tr")
+                        {
+                            @Model.SiteConfig?.TwitterText
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.TwitterText_RU
+                        }
+                    </a>
+                </div>
+                <div class="col-6 text-right">
+                    <span>
+                        @if (lang == "az")
+                        {
+                            @Model.SiteConfig?.CopyrightText_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.CopyrightText_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.SiteConfig?.CopyrightText_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.SiteConfig?.CopyrightText_TR
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-mobile d-block d-lg-none">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    @{
+                        var mobileLogoPath = "/uploads/" + Model.SiteConfig?.SecondLogoName;
+
+                        var link_ = "/" + lang + "/home";
+                    }
+                    <a class="d-block" href="@link_">
+                        <img class="prokon-mobile-logo-2 mw-100" src="@mobileLogoPath">
+                    </a>
+                </div>
+                <div class="col-6">
+                    @{
+                        var photo_ = Model.SiteConfig?.FooterPartners.Skip(4).FirstOrDefault();
+
+                        if (photo_ != null)
+                        {
+                            var photoPath_ = "/uploads/" + photo_.PhotoName;
+                            <img class="mw-100" src="@photoPath_" />
+                        }
+                    }
+                </div>
+                <div class="col-4 mt-5">
+                    <ul>
+                        @foreach (var navTitleComponent in Model.NavTitleComponents)
+                        {
+                            <li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_AZ
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_RU
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_EN
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/@navTitleComponent.Link">
+                                        @navTitleComponent.Title_TR
+                                    </a>
+                                }
+                            </li>
+                        }
+                        @*<li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/privacy">
+                                        Gizlilik bölümü
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/privacy">
+                                        Раздел конфиденциальности
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/privacy">
+                                        Privacy section
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/privacy">
+                                        Gizlilik bölümü
+                                    </a>
+                                }
+                            </li>
+                            <li>
+                                @if (lang == "az")
+                                {
+                                    <a href="/az/notice">
+                                        Qanuni bildiriş
+                                    </a>
+                                }
+                                else if (lang == "ru")
+                                {
+                                    <a href="/ru/notice">
+                                        Юридическое уведомление
+                                    </a>
+                                }
+                                else if (lang == "en")
+                                {
+                                    <a href="/en/notice">
+                                        Legal notice
+                                    </a>
+                                }
+                                else if (lang == "tr")
+                                {
+                                    <a href="/tr/notice">
+                                        Yasal uyarı
+                                    </a>
+                                }
+                            </li>*@
+                        <li>
+                            @if (lang == "az")
+                            {
+                                <a href="/az/sitemap">
+                                    Sayt xəritəsi
+                                </a>
+                            }
+                            else if (lang == "ru")
+                            {
+                                <a href="/ru/sitemap">
+                                    Карта сайта
+                                </a>
+                            }
+                            else if (lang == "en")
+                            {
+                                <a href="/en/sitemap">
+                                    Sitemap
+                                </a>
+                            }
+                            else if (lang == "tr")
+                            {
+                                <a href="/tr/sitemap">
+                                    Site haritası
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-8 mt-5">
+                    @if (lang == "az")
+                    {
+                        @Html.Raw(Model.SiteConfig?.HeadOffice_AZ)
+                    }
+                    else if (lang == "ru")
+                    {
+                        @Html.Raw(Model.SiteConfig?.HeadOffice_RU)
+                    }
+                    else if (lang == "en")
+                    {
+                        @Html.Raw(Model.SiteConfig?.HeadOffice_EN)
+                    }
+                    else if (lang == "tr")
+                    {
+                        @Html.Raw(Model.SiteConfig?.HeadOffice_TR)
+                    }
+                    @Model.SiteConfig?.Phone
+                </div>
+                <div class="col-12 mt-5 d-flex justify-content-center">
+                    @if (Model.SiteConfig != null)
+                    {
+                        var middlePhotos = Model.SiteConfig?.FooterPartners.Take(4);
+                        foreach (var footerPartner in middlePhotos)
+                        {
+                            var logoPath = "/uploads/" + footerPartner.PhotoName;
+                            <img class="mw-25 mx-1" src="@logoPath">
+                        }
+                    }
+                </div>
+                <div class="col-12 mt-5 d-flex justify-content-around">
+                    <a href="@Model.SiteConfig?.LinkedinLink">
+                        @if (lang == "az" || lang == "en" || lang == "tr")
+                        {
+                            @Model.SiteConfig?.LinkedinText
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.LinkedinText_RU
+                        }
+                    </a>
+                    <a href="@Model.SiteConfig?.FacebookLink" class="mx-3">
+                        @if (lang == "az" || lang == "en" || lang == "tr")
+                        {
+                            @Model.SiteConfig?.FacebookText
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.FacebookText_RU
+                        }
+                    </a>
+                    <a href="@Model.SiteConfig?.TwitterLink">
+                        @if (lang == "az" || lang == "en" || lang == "tr")
+                        {
+                            @Model.SiteConfig?.TwitterText
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.TwitterText_RU
+                        }
+                    </a>
+                </div>
+                <div class="col-12 mt-5 d-flex justify-content-center">
+                    <span>
+                        @if (lang == "az")
+                        {
+                            @Model.SiteConfig?.CopyrightText_AZ
+                        }
+                        else if (lang == "ru")
+                        {
+                            @Model.SiteConfig?.CopyrightText_RU
+                        }
+                        else if (lang == "en")
+                        {
+                            @Model.SiteConfig?.CopyrightText_EN
+                        }
+                        else if (lang == "tr")
+                        {
+                            @Model.SiteConfig?.CopyrightText_TR
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
